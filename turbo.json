@@ -1,0 +1,35 @@
+{
+    "$schema": "https://turbo.build/schema.json",
+    "globalDependencies": [".env"],
+    "globalEnv": [
+        "DATABASE_URL",
+        "BETTER_AUTH_SECRET",
+        "BETTER_AUTH_URL",
+        "NEXT_PUBLIC_BETTER_AUTH_URL",
+        "GOOGLE_CLIENT_ID",
+        "GOOGLE_CLIENT_SECRET",
+        "OPENROUTER_API_KEY",
+        "SCRAPER_URL"
+    ],
+    "tasks": {
+        "build": {
+            "dependsOn": ["^build"]
+        },
+        "dev": {
+            "persistent": true,
+            "cache": false
+        },
+        "lint": {
+            "cache": false
+        },
+        "db:generate": {
+            "cache": false
+        },
+        "db:migrate": {
+            "cache": false
+        },
+        "db:push": {
+            "cache": false
+        }
+    }
+}

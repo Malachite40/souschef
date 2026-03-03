@@ -1,0 +1,21 @@
+{
+    "extends": "@souschef/typescript-config/nextjs.json",
+    "compilerOptions": {
+        "baseUrl": ".",
+        "lib": ["ES2022", "DOM", "DOM.Iterable"],
+        "declaration": false,
+        "declarationMap": false,
+        "paths": {
+            "@/*": ["./*"],
+            "@souschef/ui/*": ["../../packages/ui/src/*"],
+            "@souschef/db/*": ["../../packages/db/src/*"],
+            "@souschef/db": ["../../packages/db/src/index.ts"],
+            "@souschef/trpc/*": ["../../packages/trpc/src/*"],
+            "@souschef/trpc/server": ["../../packages/trpc/src/server.ts"],
+            "@souschef/trpc/client": ["../../packages/trpc/src/client.ts"]
+        },
+        "incremental": true
+    },
+    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+    "exclude": ["node_modules"]
+}

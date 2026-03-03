@@ -1,0 +1,1 @@
+ALTER TABLE "saved_recipes" ALTER COLUMN "servings" SET DEFAULT 4;

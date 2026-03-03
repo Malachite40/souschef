@@ -1,0 +1,1 @@
+ALTER TABLE "saved_recipes" ADD COLUMN "calories_per_serving" integer;
