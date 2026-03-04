@@ -7,6 +7,12 @@
 
 @custom-variant dark (&:is(.dark *));
 
+:root {
+    --safe-area-inset-top: env(safe-area-inset-top, 0px);
+    --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+    --keyboard-height: 0px;
+}
+
 @theme inline {
     --font-sans: var(--font-inter);
     --font-serif: var(--font-serif);
@@ -95,6 +101,12 @@
         background-color: var(--color-background);
         color: var(--color-foreground);
     }
+}
+
+.field-sizing-content {
+    field-sizing: content;
+    max-height: 35dvh;
+    overflow-y: auto;
 }
 
 @keyframes blink {

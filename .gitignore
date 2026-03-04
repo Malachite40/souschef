@@ -7,3 +7,4 @@ dist/
 .env.*.local
 .turbo/
 .DS_Store
+apps/web/ios/App/Pods/
