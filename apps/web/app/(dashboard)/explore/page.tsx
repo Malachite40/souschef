@@ -9,8 +9,10 @@ export const metadata: Metadata = {
 
 export default function ExplorePage() {
     return (
-        <div className="h-[calc(100vh-3.5rem)]">
-            <GlobeContainer />
+        <div className="flex h-full flex-col pb-[var(--safe-area-inset-bottom)]">
+            <div className="min-h-0 flex-1">
+                <GlobeContainer />
+            </div>
         </div>
     );
 }

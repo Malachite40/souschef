@@ -1,3 +1,4 @@
+import { CapacitorInit } from '@/components/capacitor-init';
 import { TRPCReactProvider } from '@/trpc/react';
 import type { Metadata, Viewport } from 'next';
 import { DM_Serif_Display, Inter } from 'next/font/google';
@@ -18,6 +19,7 @@ export const viewport: Viewport = {
     width: 'device-width',
     initialScale: 1,
     maximumScale: 1,
+    viewportFit: 'cover',
 };
 
 export const metadata: Metadata = {
@@ -33,6 +35,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={`${inter.variable} ${dmSerif.variable} font-sans`}>
+                <CapacitorInit />
                 <TRPCReactProvider>{children}</TRPCReactProvider>
             </body>
         </html>

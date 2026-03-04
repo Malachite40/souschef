@@ -8,6 +8,7 @@ import { nextCookies } from 'better-auth/next-js';
 export const auth = betterAuth({
     secret: env.BETTER_AUTH_SECRET,
     baseURL: env.BETTER_AUTH_URL,
+    trustedOrigins: ['capacitor://localhost'],
     database: drizzleAdapter(db, {
         provider: 'pg',
         schema,
@@ -17,6 +18,9 @@ export const auth = betterAuth({
             clientId: env.GOOGLE_CLIENT_ID,
             clientSecret: env.GOOGLE_CLIENT_SECRET,
         },
+    },
+    account: {
+        skipStateCookieCheck: true,
     },
     plugins: [nextCookies()],
 });

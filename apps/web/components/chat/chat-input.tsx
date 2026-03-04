@@ -48,14 +48,6 @@ export function ChatInput({
     const { activeFilters, filtersExpanded, toggleFilter, clearFilters, setFiltersExpanded } =
         useChatStore();
 
-    // Auto-grow textarea
-    useEffect(() => {
-        const el = textareaRef.current;
-        if (!el) return;
-        el.style.height = 'auto';
-        el.style.height = `${Math.min(el.scrollHeight, 160)}px`;
-    }, [value, textareaRef]);
-
     // Detect slash command trigger
     useEffect(() => {
         if (value.startsWith('/')) {
@@ -184,7 +176,7 @@ export function ChatInput({
                         onPaste={handlePaste}
                         placeholder='Ask me for a recipe... (try "/" for commands)'
                         rows={1}
-                        className="flex-1 resize-none bg-transparent px-3 pt-3 pb-2 text-sm leading-relaxed placeholder:text-muted-foreground focus:outline-none"
+                        className="field-sizing-content flex-1 resize-none bg-transparent px-3 pt-3 pb-2 text-sm leading-relaxed placeholder:text-muted-foreground focus:outline-none"
                     />
 
                     {/* Expanded filter groups */}

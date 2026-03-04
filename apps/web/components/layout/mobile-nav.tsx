@@ -47,7 +47,7 @@ export function MobileNav({ userName, userEmail, userImage }: MobileNavProps) {
                 <SheetTitle className="sr-only">Navigation</SheetTitle>
                 <div className="flex h-full flex-col">
                     {/* User info */}
-                    <div className="border-b p-4">
+                    <div className="border-b p-4 pt-[calc(1rem+var(--safe-area-inset-top))]">
                         <div className="flex items-center gap-3">
                             {userImage ? (
                                 <img
@@ -98,7 +98,7 @@ export function MobileNav({ userName, userEmail, userImage }: MobileNavProps) {
                     </nav>
 
                     {/* Sign out */}
-                    <div className="border-t p-2">
+                    <div className="border-t p-2 pb-[calc(0.5rem+var(--safe-area-inset-bottom))]">
                         <button
                             type="button"
                             onClick={() => {

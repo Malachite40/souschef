@@ -26,7 +26,7 @@ export default async function DashboardLayout({
     }
 
     return (
-        <div className="flex min-h-screen flex-col">
+        <div className="flex h-dvh flex-col overflow-hidden">
             <DashboardHeader>
                 <div className="flex h-14 items-center px-4 md:px-6">
                     <MobileNav
@@ -63,7 +63,7 @@ export default async function DashboardLayout({
                     </div>
                 </div>
             </DashboardHeader>
-            <main className="flex-1">{children}</main>
+            <main className="flex-1 min-h-0">{children}</main>
         </div>
     );
 }
