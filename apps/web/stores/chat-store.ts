@@ -15,7 +15,7 @@ interface ChatState {
 
 export const useChatStore = create<ChatState>((set) => ({
     conversationId: null,
-    model: 'deepseek/deepseek-v3.1-terminus',
+    model: 'qwen/qwen3.5-plus-02-15',
     activeFilters: [],
     filtersExpanded: false,
     setConversationId: (id) => set({ conversationId: id }),

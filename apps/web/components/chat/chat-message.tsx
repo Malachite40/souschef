@@ -1,5 +1,6 @@
 "use client";
 
+import { UserAvatar } from "@/components/ui/user-avatar";
 import { RecipeCard, type RecipeData } from "@/components/recipe/recipe-card";
 import {
   type RecipeOptionData,
@@ -69,7 +70,7 @@ const markdownComponents: Components = {
   a: ({ children, href }) => (
     <a
       href={href}
-      className="underline underline-offset-2"
+      className="underline underline-offset-2 break-all"
       target="_blank"
       rel="noopener noreferrer"
     >
@@ -193,31 +194,6 @@ function RecipeCardSkeleton() {
   );
 }
 
-function UserAvatar({ name, image }: { name?: string; image?: string }) {
-  const initials = name
-    ? name
-        .split(" ")
-        .map((n) => n[0])
-        .join("")
-        .toUpperCase()
-        .slice(0, 2)
-    : "?";
-
-  return (
-    <div className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary text-[11px] font-medium text-primary-foreground">
-      {image ? (
-        <img
-          src={image}
-          alt={name || "User"}
-          className="size-7 rounded-full object-cover"
-        />
-      ) : (
-        initials
-      )}
-    </div>
-  );
-}
-
 function AssistantAvatar() {
   return (
     <div className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary/10">
@@ -263,21 +239,19 @@ export function ChatMessage({
     >
       {/* Avatar */}
       {isUser ? (
-        <UserAvatar name={userName} image={userImage} />
+        <UserAvatar name={userName} image={userImage} size="sm" />
       ) : (
         <AssistantAvatar />
       )}
 
       {/* Message column */}
       <div
-        className={`flex min-w-0 flex-col ${
-          hasRecipes && !isUser ? "w-full max-w-[95%]" : "max-w-[85%]"
-        } ${isUser ? "items-end" : "items-start"}`}
+        className={`flex min-w-0 flex-1 flex-col ${isUser ? "items-end" : "items-start"}`}
       >
         {/* Text bubble */}
         {textParts.length > 0 && (
           <div
-            className={`rounded-lg px-3 py-2 text-sm ${
+            className={`max-w-full overflow-hidden wrap-break-word rounded-lg px-3 py-2 text-sm ${
               isUser
                 ? "bg-primary text-primary-foreground"
                 : "bg-muted text-foreground"

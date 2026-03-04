@@ -1,5 +1,8 @@
 'use client';
 
+import { SidebarContent } from '@/components/layout/app-sidebar';
+import { UserAvatar } from '@/components/ui/user-avatar';
+import { useSidebarData } from '@/hooks/use-sidebar-data';
 import { authClient } from '@/lib/auth-client';
 import { Button } from '@souschef/ui/components/button';
 import {
@@ -9,16 +12,15 @@ import {
     SheetTrigger,
 } from '@souschef/ui/components/sheet';
 import {
-    ChefHatIcon,
+    BookOpenIcon,
+    GlobeIcon,
     LogOutIcon,
     MenuIcon,
     MessageSquareIcon,
-    GlobeIcon,
-    BookOpenIcon,
 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 const navItems = [
     { href: '/chat', label: 'Chat', icon: MessageSquareIcon },
@@ -36,6 +38,9 @@ export function MobileNav({ userName, userEmail, userImage }: MobileNavProps) {
     const [open, setOpen] = useState(false);
     const pathname = usePathname();
 
+    const onNavigate = useMemo(() => () => setOpen(false), []);
+    const sidebarData = useSidebarData({ onNavigate });
+
     return (
         <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
@@ -49,17 +54,11 @@ export function MobileNav({ userName, userEmail, userImage }: MobileNavProps) {
                     {/* User info */}
                     <div className="border-b p-4 pt-[calc(1rem+var(--safe-area-inset-top))]">
                         <div className="flex items-center gap-3">
-                            {userImage ? (
-                                <img
-                                    src={userImage}
-                                    alt=""
-                                    className="h-10 w-10 rounded-full"
-                                />
-                            ) : (
-                                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
-                                    <ChefHatIcon className="size-5 text-primary" />
-                                </div>
-                            )}
+                            <UserAvatar
+                                name={userName}
+                                image={userImage}
+                                size="lg"
+                            />
                             <div className="min-w-0">
                                 {userName && (
                                     <p className="truncate text-sm font-medium">
@@ -76,7 +75,7 @@ export function MobileNav({ userName, userEmail, userImage }: MobileNavProps) {
                     </div>
 
                     {/* Nav links */}
-                    <nav className="flex-1 p-2">
+                    <nav className="shrink-0 p-2">
                         {navItems.map((item) => {
                             const isActive = pathname.startsWith(item.href);
                             return (
@@ -96,6 +95,11 @@ export function MobileNav({ userName, userEmail, userImage }: MobileNavProps) {
                             );
                         })}
                     </nav>
+
+                    {/* Chat history & saved recipes */}
+                    <div className="flex-1 overflow-y-auto border-t">
+                        <SidebarContent {...sidebarData} />
+                    </div>
 
                     {/* Sign out */}
                     <div className="border-t p-2 pb-[calc(0.5rem+var(--safe-area-inset-bottom))]">

@@ -19,9 +19,17 @@ export async function initCapacitor() {
             '--keyboard-height',
             `${info.keyboardHeight}px`,
         );
+        document.documentElement.style.setProperty(
+            '--safe-area-override',
+            '0px',
+        );
     });
 
     Keyboard.addListener('keyboardWillHide', () => {
         document.documentElement.style.setProperty('--keyboard-height', '0px');
+        document.documentElement.style.setProperty(
+            '--safe-area-override',
+            'env(safe-area-inset-bottom)',
+        );
     });
 }
