@@ -8,11 +8,13 @@ COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
 # Install curl for healthcheck
 RUN apt-get update && apt-get install -y --no-install-recommends curl && rm -rf /var/lib/apt/lists/*
 
-# Copy project files and install dependencies
+# Install dependencies only (without the project itself)
 COPY pyproject.toml uv.lock ./
-RUN uv sync --frozen --no-dev
+RUN uv sync --frozen --no-dev --no-install-project
 
+# Copy app code and install the project
 COPY app/ app/
+RUN uv sync --frozen --no-dev
 
 EXPOSE 8001
 
