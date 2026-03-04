@@ -17,7 +17,9 @@ services:
       retries: 5
 
   scraper:
-    build: ./apps/scraper
+    build:
+      context: .
+      dockerfile: apps/scraper/Dockerfile
     ports:
       - "8001:8001"
     healthcheck:

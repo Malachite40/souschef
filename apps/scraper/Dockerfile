@@ -9,11 +9,11 @@ COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
 RUN apt-get update && apt-get install -y --no-install-recommends curl && rm -rf /var/lib/apt/lists/*
 
 # Install dependencies only (without the project itself)
-COPY pyproject.toml uv.lock ./
+COPY apps/scraper/pyproject.toml apps/scraper/uv.lock ./
 RUN uv sync --frozen --no-dev --no-install-project
 
 # Copy app code and install the project
-COPY app/ app/
+COPY apps/scraper/app/ app/
 RUN uv sync --frozen --no-dev
 
 EXPOSE 8001
