@@ -1,8 +1,8 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-    appId: 'com.souschef.app',
-    appName: 'SousChef',
+    appId: 'com.yeschefai.app',
+    appName: 'YesChef AI',
     webDir: '.next',
     server: {
         url: process.env.CAPACITOR_SERVER_URL || 'http://localhost:3020',

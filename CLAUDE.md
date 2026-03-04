@@ -1,4 +1,4 @@
-# SousChef
+# YesChef AI
 
 AI-powered recipe discovery app. Chat with an AI assistant that searches the web for recipes, presents options, and lets you save favorites.
 

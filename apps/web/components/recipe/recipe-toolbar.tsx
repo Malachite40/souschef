@@ -7,15 +7,15 @@ import {
     type CostFilter,
     type RatingFilter,
 } from '@/stores/recipes-store';
-import { Button } from '@souschef/ui/components/button';
-import { Input } from '@souschef/ui/components/input';
+import { Button } from '@yeschefai/ui/components/button';
+import { Input } from '@yeschefai/ui/components/input';
 import {
     Select,
     SelectContent,
     SelectItem,
     SelectTrigger,
     SelectValue,
-} from '@souschef/ui/components/select';
+} from '@yeschefai/ui/components/select';
 import { SearchIcon, XIcon } from 'lucide-react';
 
 export function RecipeToolbar() {

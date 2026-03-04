@@ -2,26 +2,18 @@
 
 import { useChatStore } from '@/stores/chat-store';
 import { api } from '@/trpc/react';
-import { usePathname, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useCallback } from 'react';
 
 export function useSidebarData(options?: { onNavigate?: () => void }) {
     const { conversationId, setConversationId, setModel } = useChatStore();
     const utils = api.useUtils();
     const router = useRouter();
-    const pathname = usePathname();
 
     const { data: conversations, isLoading: conversationsLoading } =
         api.chat.listConversations.useQuery();
     const { data: conversationRecipes } =
         api.chat.listConversationRecipes.useQuery();
-    const { data: savedRecipes, isLoading: savedRecipesLoading } =
-        api.recipes.list.useQuery();
-
-    const activeRecipeId = pathname.startsWith('/recipes/')
-        ? (pathname.split('/')[2] ?? null)
-        : null;
-
     const deleteConversation = api.chat.deleteConversation.useMutation({
         onSuccess: () => {
             utils.chat.listConversations.invalidate();
@@ -65,8 +57,5 @@ export function useSidebarData(options?: { onNavigate?: () => void }) {
         loadConversation,
         deleteConversation,
         handleNewConversation,
-        savedRecipes,
-        savedRecipesLoading,
-        activeRecipeId,
     };
 }

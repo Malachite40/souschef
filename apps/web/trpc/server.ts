@@ -1,7 +1,7 @@
 import 'server-only';
 
-import { createCaller, createNextTRPCContext } from '@souschef/trpc/server';
-import type { AppRouter } from '@souschef/trpc/server';
+import { createCaller, createNextTRPCContext } from '@yeschefai/trpc/server';
+import type { AppRouter } from '@yeschefai/trpc/server';
 import { createHydrationHelpers } from '@trpc/react-query/rsc';
 import { headers } from 'next/headers';
 import { cache } from 'react';

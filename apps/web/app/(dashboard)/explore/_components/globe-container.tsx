@@ -1,6 +1,6 @@
 'use client';
 
-import { Skeleton } from '@souschef/ui/components/skeleton';
+import { Skeleton } from '@yeschefai/ui/components/skeleton';
 import dynamic from 'next/dynamic';
 
 const GlobeScene = dynamic(() => import('./globe-scene'), {

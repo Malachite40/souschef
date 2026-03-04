@@ -9,7 +9,7 @@ import {
 } from '@/lib/data/filter-data';
 import type { SlashCommand } from '@/lib/data/slash-commands';
 import { useChatStore } from '@/stores/chat-store';
-import { Button } from '@souschef/ui/components/button';
+import { Button } from '@yeschefai/ui/components/button';
 import { FilterIcon, SendIcon, XIcon } from 'lucide-react';
 import {
     useCallback,

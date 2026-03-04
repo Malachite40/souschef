@@ -4,13 +4,13 @@ import { SidebarContent } from '@/components/layout/app-sidebar';
 import { UserAvatar } from '@/components/ui/user-avatar';
 import { useSidebarData } from '@/hooks/use-sidebar-data';
 import { authClient } from '@/lib/auth-client';
-import { Button } from '@souschef/ui/components/button';
+import { Button } from '@yeschefai/ui/components/button';
 import {
     Sheet,
     SheetContent,
     SheetTitle,
     SheetTrigger,
-} from '@souschef/ui/components/sheet';
+} from '@yeschefai/ui/components/sheet';
 import {
     BookOpenIcon,
     GlobeIcon,
@@ -96,7 +96,7 @@ export function MobileNav({ userName, userEmail, userImage }: MobileNavProps) {
                         })}
                     </nav>
 
-                    {/* Chat history & saved recipes */}
+                    {/* Chat history */}
                     <div className="flex-1 overflow-y-auto border-t">
                         <SidebarContent {...sidebarData} />
                     </div>

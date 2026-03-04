@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { Badge } from "@souschef/ui/components/badge";
-import { Button } from "@souschef/ui/components/button";
-import { Card, CardContent, CardHeader } from "@souschef/ui/components/card";
-import { Skeleton } from "@souschef/ui/components/skeleton";
+import { Badge } from "@yeschefai/ui/components/badge";
+import { Button } from "@yeschefai/ui/components/button";
+import { Card, CardContent, CardHeader } from "@yeschefai/ui/components/card";
+import { Skeleton } from "@yeschefai/ui/components/skeleton";
 import {
   ChefHatIcon,
   ClockIcon,

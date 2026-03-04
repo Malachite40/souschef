@@ -19,11 +19,11 @@ import {
 } from '@/lib/utils/cost-estimator';
 import { scaleQuantity } from '@/lib/utils/scale-quantity';
 import { api } from '@/trpc/react';
-import { Badge } from '@souschef/ui/components/badge';
-import { Button } from '@souschef/ui/components/button';
-import { Separator } from '@souschef/ui/components/separator';
-import { Skeleton } from '@souschef/ui/components/skeleton';
-import { StarRating } from '@souschef/ui/components/star-rating';
+import { Badge } from '@yeschefai/ui/components/badge';
+import { Button } from '@yeschefai/ui/components/button';
+import { Separator } from '@yeschefai/ui/components/separator';
+import { Skeleton } from '@yeschefai/ui/components/skeleton';
+import { StarRating } from '@yeschefai/ui/components/star-rating';
 import {
     ArrowLeftIcon,
     ClockIcon,

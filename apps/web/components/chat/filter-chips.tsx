@@ -6,7 +6,7 @@ import {
     FILTER_GROUP_LABELS,
     type FilterGroup,
 } from '@/lib/data/filter-data';
-import { Button } from '@souschef/ui/components/button';
+import { Button } from '@yeschefai/ui/components/button';
 import { FilterIcon, XIcon } from 'lucide-react';
 
 const GROUPS: FilterGroup[] = ['dietary', 'time', 'difficulty'];

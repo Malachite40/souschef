@@ -11,17 +11,17 @@ import {
 import { filterRecipes, sortRecipes } from '@/lib/utils/recipe-filters';
 import { api } from '@/trpc/react';
 import { useRecipesStore } from '@/stores/recipes-store';
-import { Badge } from '@souschef/ui/components/badge';
-import { Button } from '@souschef/ui/components/button';
+import { Badge } from '@yeschefai/ui/components/badge';
+import { Button } from '@yeschefai/ui/components/button';
 import {
     Card,
     CardContent,
     CardHeader,
     CardTitle,
-} from '@souschef/ui/components/card';
-import { Separator } from '@souschef/ui/components/separator';
-import { Skeleton } from '@souschef/ui/components/skeleton';
-import { StarRating } from '@souschef/ui/components/star-rating';
+} from '@yeschefai/ui/components/card';
+import { Separator } from '@yeschefai/ui/components/separator';
+import { Skeleton } from '@yeschefai/ui/components/skeleton';
+import { StarRating } from '@yeschefai/ui/components/star-rating';
 import {
     ChefHatIcon,
     ClockIcon,
@@ -134,7 +134,7 @@ export function SavedRecipesList() {
                 <ChefHatIcon className="mb-3 size-12 text-primary/40" />
                 <p className="mb-1 font-medium">No saved recipes yet</p>
                 <p className="mb-4 text-sm text-muted-foreground">
-                    Chat with SousChef and save recipes you like!
+                    Chat with YesChef AI and save recipes you like!
                 </p>
                 <Link href="/chat">
                     <Button variant="outline" className="gap-1.5">

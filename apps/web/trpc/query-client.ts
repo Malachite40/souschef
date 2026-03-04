@@ -1,1 +1,1 @@
-export { createQueryClient } from '@souschef/trpc/client';
+export { createQueryClient } from '@yeschefai/trpc/client';

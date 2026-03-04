@@ -1,5 +1,5 @@
 {
-    "name": "souschef",
+    "name": "yeschefai",
     "private": true,
     "workspaces": [
         "apps/*",

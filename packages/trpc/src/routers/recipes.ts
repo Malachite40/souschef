@@ -1,4 +1,4 @@
-import { chatConversations, savedRecipes } from '@souschef/db/schema';
+import { chatConversations, savedRecipes } from '@yeschefai/db/schema';
 import { and, count, desc, eq } from 'drizzle-orm';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';

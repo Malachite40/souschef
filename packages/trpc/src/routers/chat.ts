@@ -1,4 +1,4 @@
-import { chatConversations, chatMessages } from '@souschef/db/schema';
+import { chatConversations, chatMessages } from '@yeschefai/db/schema';
 import { and, desc, eq, isNotNull } from 'drizzle-orm';
 import { z } from 'zod';
 import { authenticatedProcedure, createTRPCRouter } from '../trpc';

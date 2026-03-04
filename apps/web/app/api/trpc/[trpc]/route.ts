@@ -1,6 +1,6 @@
 import { auth } from '@/auth';
 import { env } from '@/env';
-import { appRouter, createNextTRPCContext } from '@souschef/trpc/server';
+import { appRouter, createNextTRPCContext } from '@yeschefai/trpc/server';
 import { fetchRequestHandler } from '@trpc/server/adapters/fetch';
 import type { NextRequest } from 'next/server';
 

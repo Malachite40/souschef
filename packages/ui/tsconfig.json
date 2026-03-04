@@ -1,9 +1,9 @@
 {
-    "extends": "@souschef/typescript-config/library.json",
+    "extends": "@yeschefai/typescript-config/library.json",
     "compilerOptions": {
         "baseUrl": ".",
         "paths": {
-            "@souschef/ui/*": ["./src/*"]
+            "@yeschefai/ui/*": ["./src/*"]
         }
     },
     "include": ["src/**/*.ts", "src/**/*.tsx"],

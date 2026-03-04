@@ -1,5 +1,5 @@
 {
-    "name": "@souschef/ui",
+    "name": "@yeschefai/ui",
     "private": true,
     "version": "0.0.0",
     "type": "module",
@@ -19,7 +19,7 @@
         "tw-animate-css": "^1.2.5"
     },
     "devDependencies": {
-        "@souschef/typescript-config": "*",
+        "@yeschefai/typescript-config": "*",
         "@tailwindcss/postcss": "^4.0.0",
         "@types/node": "^22.10.5",
         "@types/react": "^19.0.7",

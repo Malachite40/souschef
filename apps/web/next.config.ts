@@ -4,9 +4,9 @@ import type { NextConfig } from 'next';
 const nextConfig: NextConfig = {
     devIndicators: false,
     transpilePackages: [
-        '@souschef/ui',
-        '@souschef/db',
-        '@souschef/trpc',
+        '@yeschefai/ui',
+        '@yeschefai/db',
+        '@yeschefai/trpc',
     ],
     output: 'standalone',
     outputFileTracingRoot: path.join(__dirname, '../../'),

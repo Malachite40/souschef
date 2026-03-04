@@ -1,5 +1,5 @@
 {
-    "extends": "@souschef/typescript-config/nextjs.json",
+    "extends": "@yeschefai/typescript-config/nextjs.json",
     "compilerOptions": {
         "baseUrl": ".",
         "lib": ["ES2022", "DOM", "DOM.Iterable"],
@@ -7,12 +7,12 @@
         "declarationMap": false,
         "paths": {
             "@/*": ["./*"],
-            "@souschef/ui/*": ["../../packages/ui/src/*"],
-            "@souschef/db/*": ["../../packages/db/src/*"],
-            "@souschef/db": ["../../packages/db/src/index.ts"],
-            "@souschef/trpc/*": ["../../packages/trpc/src/*"],
-            "@souschef/trpc/server": ["../../packages/trpc/src/server.ts"],
-            "@souschef/trpc/client": ["../../packages/trpc/src/client.ts"]
+            "@yeschefai/ui/*": ["../../packages/ui/src/*"],
+            "@yeschefai/db/*": ["../../packages/db/src/*"],
+            "@yeschefai/db": ["../../packages/db/src/index.ts"],
+            "@yeschefai/trpc/*": ["../../packages/trpc/src/*"],
+            "@yeschefai/trpc/server": ["../../packages/trpc/src/server.ts"],
+            "@yeschefai/trpc/client": ["../../packages/trpc/src/client.ts"]
         },
         "incremental": true
     },

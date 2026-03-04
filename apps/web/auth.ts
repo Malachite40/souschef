@@ -1,6 +1,6 @@
 import { env } from '@/env';
-import { db } from '@souschef/db';
-import * as schema from '@souschef/db/schema';
+import { db } from '@yeschefai/db';
+import * as schema from '@yeschefai/db/schema';
 import { betterAuth } from 'better-auth';
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
 import { nextCookies } from 'better-auth/next-js';

@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-        <string>SousChef</string>
+        <string>YesChef AI</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -50,10 +50,10 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>souschef</string>
+				<string>yeschefai</string>
 			</array>
 			<key>CFBundleURLName</key>
-			<string>com.souschef.app</string>
+			<string>com.yeschefai.app</string>
 		</dict>
 	</array>
 </dict>

@@ -6,7 +6,7 @@ import {
     SelectItem,
     SelectTrigger,
     SelectValue,
-} from '@souschef/ui/components/select';
+} from '@yeschefai/ui/components/select';
 import { UsersIcon } from 'lucide-react';
 
 const SERVING_OPTIONS = [2, 4, 6, 8];

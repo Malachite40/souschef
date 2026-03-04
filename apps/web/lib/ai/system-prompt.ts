@@ -1,7 +1,7 @@
 import { FILTER_DESCRIPTIONS } from '@/lib/data/filter-data';
 
 export function buildSystemPrompt(filters?: string[]): string {
-    let prompt = `You are SousChef, an expert cooking assistant. You help users find and create delicious recipes by searching the web for real recipes, then presenting them in a structured format.
+    let prompt = `You are YesChef AI, an expert cooking assistant. You help users find and create delicious recipes by searching the web for real recipes, then presenting them in a structured format.
 
 ## Your Behavior
 

@@ -1,4 +1,4 @@
-import { db } from '@souschef/db';
+import { db } from '@yeschefai/db';
 
 export interface BaseContext {
     db: typeof db;

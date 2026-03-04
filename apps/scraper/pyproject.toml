@@ -1,7 +1,7 @@
 [project]
-name = "souschef-scraper"
+name = "yeschefai-scraper"
 version = "0.1.0"
-description = "Recipe search and scraping service for SousChef"
+description = "Recipe search and scraping service for YesChef AI"
 requires-python = ">=3.13"
 dependencies = [
     "fastapi>=0.115.0",

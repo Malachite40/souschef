@@ -10,10 +10,10 @@
         "cssVariables": true
     },
     "aliases": {
-        "components": "@souschef/ui/components",
-        "utils": "@souschef/ui/lib/utils",
-        "ui": "@souschef/ui/components",
-        "lib": "@souschef/ui/lib",
-        "hooks": "@souschef/ui/hooks"
+        "components": "@yeschefai/ui/components",
+        "utils": "@yeschefai/ui/lib/utils",
+        "ui": "@yeschefai/ui/components",
+        "lib": "@yeschefai/ui/lib",
+        "hooks": "@yeschefai/ui/hooks"
     }
 }

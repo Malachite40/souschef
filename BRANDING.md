@@ -1,12 +1,12 @@
-# SousChef Brand Guide
+# YesChef AI Brand Guide
 
-> Reference for AI agents and developers building features for SousChef.
+> Reference for AI agents and developers building features for YesChef AI.
 
 ---
 
 ## Brand Personality & Voice
 
-SousChef is a **warm, skilled kitchen assistant** — think the feeling of a well-loved kitchen with something delicious simmering on the stove.
+YesChef AI is a **warm, skilled kitchen assistant** — think the feeling of a well-loved kitchen with something delicious simmering on the stove.
 
 **Tone:** Warm, encouraging, practical. Never clinical or pretentious.
 
@@ -107,10 +107,10 @@ The palette anchors on **terracotta/copper** (warmth, hearth, cooking) with **sa
 | Use Case              | Font               | CSS Class / Variable    |
 |-----------------------|--------------------|-------------------------|
 | All UI text           | Inter              | `font-sans` / `--font-sans` |
-| "SousChef" brand name | DM Serif Display   | `font-serif` / `--font-serif` |
+| "YesChef AI" brand name | DM Serif Display   | `font-serif` / `--font-serif` |
 
 **Rules:**
-- DM Serif Display is **only** for the "SousChef" brand name — never for body text, headings, or UI labels
+- DM Serif Display is **only** for the "YesChef AI" brand name — never for body text, headings, or UI labels
 - Inter is the default for everything else
 - The brand name uses: `font-serif text-primary` (+ appropriate size class)
 
@@ -155,7 +155,7 @@ The palette anchors on **terracotta/copper** (warmth, hearth, cooking) with **sa
 
 ### Do
 - Use warm cream backgrounds instead of pure white
-- Apply `font-serif text-primary` to the "SousChef" brand name
+- Apply `font-serif text-primary` to the "YesChef AI" brand name
 - Use `ChefHatIcon` with `text-primary` for brand presence
 - Keep the warm undertone in all neutral colors (hue 60-80)
 - Use sage green (`accent`) for highlighting and active states
@@ -164,7 +164,7 @@ The palette anchors on **terracotta/copper** (warmth, hearth, cooking) with **sa
 
 ### Don't
 - Use pure gray (chroma 0) for any neutral — always add warm undertone
-- Use DM Serif Display for anything other than "SousChef"
+- Use DM Serif Display for anything other than "YesChef AI"
 - Use cold blues or purples as primary or accent colors
 - Hardcode color values in components — always use semantic tokens
 - Mix icon libraries — stick to lucide-react

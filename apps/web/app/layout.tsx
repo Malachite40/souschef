@@ -23,7 +23,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-    title: 'SousChef',
+    title: 'YesChef AI',
     description: 'AI-powered recipe assistant with web search and Amazon Fresh links',
 };
 

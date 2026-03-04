@@ -1,5 +1,5 @@
 {
-    "name": "@souschef/trpc",
+    "name": "@yeschefai/trpc",
     "private": true,
     "version": "0.0.0",
     "type": "module",
@@ -8,7 +8,7 @@
         "./client": "./src/client.ts"
     },
     "dependencies": {
-        "@souschef/db": "*",
+        "@yeschefai/db": "*",
         "drizzle-orm": "^0.38.3",
         "@trpc/server": "^11.0.0-rc.682",
         "@trpc/client": "^11.0.0-rc.682",
@@ -18,7 +18,7 @@
         "zod": "^3.24.1"
     },
     "devDependencies": {
-        "@souschef/typescript-config": "*",
+        "@yeschefai/typescript-config": "*",
         "@types/node": "^22.10.5",
         "typescript": "^5.7.3"
     }

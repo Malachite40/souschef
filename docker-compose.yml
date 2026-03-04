@@ -5,13 +5,13 @@ services:
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
-      POSTGRES_DB: souschef
+      POSTGRES_DB: yeschefai
     ports:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U user -d souschef"]
+      test: ["CMD-SHELL", "pg_isready -U user -d yeschefai"]
       interval: 5s
       timeout: 5s
       retries: 5

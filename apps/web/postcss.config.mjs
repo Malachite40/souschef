@@ -1,1 +1,1 @@
-export { default } from '@souschef/ui/postcss.config';
+export { default } from '@yeschefai/ui/postcss.config';

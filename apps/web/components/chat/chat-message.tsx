@@ -7,8 +7,8 @@ import {
   RecipeOptionsGrid,
   RecipeOptionsGridSkeleton,
 } from "@/components/recipe/recipe-options-grid";
-import { Card, CardContent, CardHeader } from "@souschef/ui/components/card";
-import { Skeleton } from "@souschef/ui/components/skeleton";
+import { Card, CardContent, CardHeader } from "@yeschefai/ui/components/card";
+import { Skeleton } from "@yeschefai/ui/components/skeleton";
 import { ChefHatIcon } from "lucide-react";
 import type { Components } from "react-markdown";
 import ReactMarkdown from "react-markdown";

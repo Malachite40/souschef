@@ -39,7 +39,7 @@ export default async function DashboardLayout({
                     />
                     <Link href="/chat" className="flex items-center gap-2">
                         <ChefHatIcon className="size-5 text-primary" />
-                        <span className="font-serif text-xl leading-none text-primary">SousChef</span>
+                        <span className="font-serif text-xl leading-none text-primary">YesChef AI</span>
                     </Link>
                     <nav className="ml-8 hidden items-center gap-4 md:flex">
                         {navItems.map((item) => (

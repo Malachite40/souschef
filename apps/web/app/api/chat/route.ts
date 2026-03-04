@@ -3,8 +3,8 @@ import { env } from '@/env';
 import { extractRecipeTitles } from '@/lib/ai/recipe-utils';
 import { buildSystemPrompt } from '@/lib/ai/system-prompt';
 import { createOpenRouter } from '@openrouter/ai-sdk-provider';
-import { db } from '@souschef/db';
-import { chatConversations, chatMessages } from '@souschef/db/schema';
+import { db } from '@yeschefai/db';
+import { chatConversations, chatMessages } from '@yeschefai/db/schema';
 import {
     type UIMessage,
     convertToModelMessages,
@@ -19,7 +19,7 @@ const openrouter = createOpenRouter({
     apiKey: env.OPENROUTER_API_KEY,
 });
 
-const DEFAULT_MODEL = 'qwen/qwen3.5-plus-02-15';
+const DEFAULT_MODEL = 'openai/gpt-4o';
 const SEARCH_MAX_RESULTS = 5;
 const BROWSE_MAX_RESULTS = 8;
 const MAX_TOOL_STEPS = 3;

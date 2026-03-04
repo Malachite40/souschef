@@ -6,7 +6,7 @@ import {
     CardContent,
     CardHeader,
     CardTitle,
-} from '@souschef/ui/components/card';
+} from '@yeschefai/ui/components/card';
 
 const POPUP_WIDTH = 320;
 const POPUP_HEIGHT = 350;

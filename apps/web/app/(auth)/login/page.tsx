@@ -2,7 +2,7 @@
 
 import { authClient } from '@/lib/auth-client';
 import { isNativeApp } from '@/lib/utils/platform';
-import { Button } from '@souschef/ui/components/button';
+import { Button } from '@yeschefai/ui/components/button';
 import { ChefHatIcon } from 'lucide-react';
 
 async function handleNativeSignIn() {
@@ -49,7 +49,7 @@ export default function LoginPage() {
             <div className="w-full max-w-sm space-y-6 rounded-lg border bg-card p-8">
                 <div className="text-center">
                     <ChefHatIcon className="mx-auto mb-3 size-10 text-primary" />
-                    <h1 className="font-serif text-3xl text-primary">SousChef</h1>
+                    <h1 className="font-serif text-3xl text-primary">YesChef AI</h1>
                     <p className="mt-2 text-sm text-muted-foreground">
                         AI-powered recipe assistant
                     </p>

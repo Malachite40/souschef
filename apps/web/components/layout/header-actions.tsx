@@ -1,13 +1,13 @@
 "use client";
 
 import { useHeaderActionsStore } from "@/stores/header-actions-store";
-import { Button } from "@souschef/ui/components/button";
+import { Button } from "@yeschefai/ui/components/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@souschef/ui/components/dropdown-menu";
+} from "@yeschefai/ui/components/dropdown-menu";
 import { MoreVerticalIcon } from "lucide-react";
 
 export function HeaderActions() {

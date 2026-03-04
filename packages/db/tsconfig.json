@@ -1,11 +1,11 @@
 {
-    "extends": "@souschef/typescript-config/library.json",
+    "extends": "@yeschefai/typescript-config/library.json",
     "compilerOptions": {
         "baseUrl": ".",
         "module": "ESNext",
         "moduleResolution": "Bundler",
         "paths": {
-            "@souschef/db/*": ["./src/*"]
+            "@yeschefai/db/*": ["./src/*"]
         }
     },
     "include": ["src/**/*.ts"],

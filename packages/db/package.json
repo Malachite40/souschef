@@ -1,5 +1,5 @@
 {
-    "name": "@souschef/db",
+    "name": "@yeschefai/db",
     "private": true,
     "version": "0.0.0",
     "type": "module",
@@ -20,7 +20,7 @@
         "postgres": "^3.4.5"
     },
     "devDependencies": {
-        "@souschef/typescript-config": "*",
+        "@yeschefai/typescript-config": "*",
         "drizzle-kit": "^0.30.4",
         "typescript": "^5.7.3"
     }

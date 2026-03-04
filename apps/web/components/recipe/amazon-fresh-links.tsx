@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@souschef/ui/components/button';
+import { Button } from '@yeschefai/ui/components/button';
 import { CheckIcon, CopyIcon, ExternalLinkIcon, ShoppingCartIcon } from 'lucide-react';
 import { useCallback, useState } from 'react';
 

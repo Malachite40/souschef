@@ -1,21 +1,18 @@
 'use client';
 
 import { useSidebarData } from '@/hooks/use-sidebar-data';
-import { Button } from '@souschef/ui/components/button';
-import { Skeleton } from '@souschef/ui/components/skeleton';
+import { Button } from '@yeschefai/ui/components/button';
+import { Skeleton } from '@yeschefai/ui/components/skeleton';
 import {
     Tooltip,
     TooltipContent,
     TooltipTrigger,
-} from '@souschef/ui/components/tooltip';
+} from '@yeschefai/ui/components/tooltip';
 import {
     ChefHatIcon,
     MessageSquarePlusIcon,
-    StarIcon,
     Trash2Icon,
 } from 'lucide-react';
-import Link from 'next/link';
-
 export interface SidebarContentProps {
     conversations:
         | Array<{ id: string; title: string | null; model: string | null }>
@@ -26,11 +23,6 @@ export interface SidebarContentProps {
     loadConversation: (id: string) => void;
     deleteConversation: { mutate: (args: { id: string }) => void };
     handleNewConversation: () => void;
-    savedRecipes:
-        | Array<{ id: string; title: string; rating: number | null }>
-        | undefined;
-    savedRecipesLoading: boolean;
-    activeRecipeId: string | null;
 }
 
 export function SidebarContent({
@@ -41,9 +33,6 @@ export function SidebarContent({
     loadConversation,
     deleteConversation,
     handleNewConversation,
-    savedRecipes,
-    savedRecipesLoading,
-    activeRecipeId,
 }: SidebarContentProps) {
     return (
         <>
@@ -77,14 +66,11 @@ export function SidebarContent({
                                 ? 'bg-accent text-accent-foreground'
                                 : 'hover:bg-accent/50'
                         }`}
+                        onClick={() => loadConversation(conv.id)}
                     >
-                        <Button
-                            variant="ghost"
-                            className="h-auto flex-1 justify-start truncate p-0 font-normal"
-                            onClick={() => loadConversation(conv.id)}
-                        >
+                        <span className="flex-1 truncate text-left">
                             {conv.title || 'Untitled'}
-                        </Button>
+                        </span>
                         <Button
                             variant="ghost"
                             size="icon-xs"
@@ -124,52 +110,6 @@ export function SidebarContent({
                         )}
                     </div>
                 ))}
-            </div>
-            <div className="px-3 pt-4">
-                <p className="mb-1 px-2 text-xs font-medium text-muted-foreground">
-                    Saved Recipes
-                </p>
-                {savedRecipesLoading && (
-                    <div className="space-y-2 p-2">
-                        <Skeleton className="h-6 w-full" />
-                        <Skeleton className="h-6 w-full" />
-                        <Skeleton className="h-6 w-3/4" />
-                    </div>
-                )}
-                {!savedRecipesLoading && savedRecipes?.length === 0 && (
-                    <p className="px-2 py-1.5 text-xs text-muted-foreground">
-                        No saved recipes yet
-                    </p>
-                )}
-                {savedRecipes?.map((recipe) => (
-                    <Link
-                        key={recipe.id}
-                        href={`/recipes/${recipe.id}`}
-                        className={`group flex items-center gap-1 rounded px-2 py-1.5 text-xs ${
-                            recipe.id === activeRecipeId
-                                ? 'bg-accent text-accent-foreground'
-                                : 'hover:bg-accent/50'
-                        }`}
-                    >
-                        <span className="flex-1 truncate">{recipe.title}</span>
-                        {recipe.rating != null && (
-                            <span className="flex shrink-0 items-center gap-0.5 text-muted-foreground">
-                                <StarIcon className="size-3 fill-current" />
-                                <span className="text-[10px]">
-                                    {recipe.rating}
-                                </span>
-                            </span>
-                        )}
-                    </Link>
-                ))}
-                {savedRecipes && savedRecipes.length > 0 && (
-                    <Link
-                        href="/recipes"
-                        className="block px-2 py-1.5 text-xs text-muted-foreground hover:text-foreground"
-                    >
-                        View all recipes
-                    </Link>
-                )}
             </div>
         </>
     );

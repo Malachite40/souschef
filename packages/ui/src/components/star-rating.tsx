@@ -3,7 +3,7 @@
 import { StarIcon } from 'lucide-react';
 import { useState } from 'react';
 
-import { cn } from '@souschef/ui/lib/utils';
+import { cn } from '@yeschefai/ui/lib/utils';
 
 interface StarRatingProps {
     value: number;

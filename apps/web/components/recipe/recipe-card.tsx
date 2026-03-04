@@ -10,21 +10,21 @@ import { ServingSelector } from '@/components/recipe/serving-selector';
 import { estimateTotalCost, formatPrice } from '@/lib/utils/cost-estimator';
 import { scaleQuantity } from '@/lib/utils/scale-quantity';
 import { api } from '@/trpc/react';
-import { Badge } from '@souschef/ui/components/badge';
-import { Button } from '@souschef/ui/components/button';
+import { Badge } from '@yeschefai/ui/components/badge';
+import { Button } from '@yeschefai/ui/components/button';
 import {
     Card,
     CardContent,
     CardHeader,
     CardTitle,
-} from '@souschef/ui/components/card';
-import { Separator } from '@souschef/ui/components/separator';
+} from '@yeschefai/ui/components/card';
+import { Separator } from '@yeschefai/ui/components/separator';
 import {
     Tabs,
     TabsContent,
     TabsList,
     TabsTrigger,
-} from '@souschef/ui/components/tabs';
+} from '@yeschefai/ui/components/tabs';
 import {
     BookmarkIcon,
     CheckIcon,

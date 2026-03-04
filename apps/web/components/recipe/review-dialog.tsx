@@ -1,7 +1,7 @@
 'use client';
 
 import { api } from '@/trpc/react';
-import { Button } from '@souschef/ui/components/button';
+import { Button } from '@yeschefai/ui/components/button';
 import {
     Dialog,
     DialogContent,
@@ -9,9 +9,9 @@ import {
     DialogFooter,
     DialogHeader,
     DialogTitle,
-} from '@souschef/ui/components/dialog';
-import { StarRating } from '@souschef/ui/components/star-rating';
-import { Textarea } from '@souschef/ui/components/textarea';
+} from '@yeschefai/ui/components/dialog';
+import { StarRating } from '@yeschefai/ui/components/star-rating';
+import { Textarea } from '@yeschefai/ui/components/textarea';
 import { useState, useEffect } from 'react';
 
 interface ReviewDialogProps {
