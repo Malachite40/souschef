@@ -10,7 +10,7 @@ import { authClient } from '@/lib/auth-client';
 import { useChatStore } from '@/stores/chat-store';
 import { api } from '@/trpc/react';
 import { useChat } from '@ai-sdk/react';
-import { DefaultChatTransport } from 'ai';
+import { type UIMessage, DefaultChatTransport } from 'ai';
 import { ArrowDownIcon, ChefHatIcon } from 'lucide-react';
 import { useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
@@ -67,6 +67,11 @@ export function ChatPanel() {
     const { conversationId, setConversationId } = useChatStore();
     useChatHeaderActions();
     const [inputValue, setInputValue] = useState('');
+    const [greeting, setGreeting] = useState('What can I cook for you?');
+
+    useEffect(() => {
+        setGreeting(getTimeOfDayGreeting());
+    }, []);
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const scrollContainerRef = useRef<HTMLDivElement>(null);
     const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -108,13 +113,32 @@ export function ChatPanel() {
         [],
     );
 
-    const { messages, sendMessage, status, error } = useChat({
+    const { messages, sendMessage, setMessages, status, error } = useChat({
+        id: conversationId ?? 'new',
         transport,
         onFinish: async () => {
             utils.chat.listConversations.invalidate();
             utils.chat.listConversationRecipes.invalidate();
         },
     });
+
+    const { data: conversationData, isLoading: isConversationLoading } =
+        api.chat.getConversation.useQuery(
+            { id: conversationId! },
+            { enabled: !!conversationId },
+        );
+
+    useEffect(() => {
+        if (!conversationData?.messages) return;
+        const uiMessages: UIMessage[] = conversationData.messages.map(
+            (msg) => ({
+                id: msg.id,
+                role: msg.role as 'user' | 'assistant',
+                parts: [{ type: 'text' as const, text: msg.content }],
+            }),
+        );
+        setMessages(uiMessages);
+    }, [conversationData, setMessages]);
 
     const isLoading = status === 'streaming' || status === 'submitted';
 
@@ -213,22 +237,36 @@ export function ChatPanel() {
                     className="h-full max-w-dvw overflow-y-auto p-4"
                 >
                     <div className="mx-auto max-w-4xl">
-                        {messages.length === 0 && (
+                        {messages.length === 0 &&
+                            !isConversationLoading &&
+                            !conversationId && (
+                                <div className="flex h-full items-center justify-center pt-16 pb-8">
+                                    <div className="text-center">
+                                        <div className="mx-auto mb-4 flex size-16 items-center justify-center rounded-full bg-primary/10">
+                                            <ChefHatIcon className="size-8 text-primary" />
+                                        </div>
+                                        <p className="mb-1 text-lg font-medium">
+                                            {greeting}
+                                        </p>
+                                        <p className="mb-6 text-sm text-muted-foreground">
+                                            Ask me for any recipe and I&apos;ll
+                                            search the web for the best options.
+                                        </p>
+                                        <SuggestionChips
+                                            onSend={handleSuggestionSend}
+                                        />
+                                    </div>
+                                </div>
+                            )}
+                        {isConversationLoading && conversationId && (
                             <div className="flex h-full items-center justify-center pt-16 pb-8">
                                 <div className="text-center">
-                                    <div className="mx-auto mb-4 flex size-16 items-center justify-center rounded-full bg-primary/10">
+                                    <div className="mx-auto mb-4 flex size-16 items-center justify-center rounded-full bg-primary/10 animate-pulse">
                                         <ChefHatIcon className="size-8 text-primary" />
                                     </div>
-                                    <p className="mb-1 text-lg font-medium">
-                                        {getTimeOfDayGreeting()}
+                                    <p className="text-sm text-muted-foreground">
+                                        Loading conversation...
                                     </p>
-                                    <p className="mb-6 text-sm text-muted-foreground">
-                                        Ask me for any recipe and I&apos;ll
-                                        search the web for the best options.
-                                    </p>
-                                    <SuggestionChips
-                                        onSend={handleSuggestionSend}
-                                    />
                                 </div>
                             </div>
                         )}
