@@ -29,7 +29,9 @@ export default async function PublicLayout({
                             href="/chat"
                             className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary"
                         >
-                            <span>{session.user.name ?? session.user.email}</span>
+                            <span>
+                                {session.user.name ?? session.user.email}
+                            </span>
                             <UserAvatar
                                 name={session.user.name}
                                 image={session.user.image}
@@ -46,7 +48,9 @@ export default async function PublicLayout({
                     )}
                 </div>
             </DashboardHeader>
-            <main className="flex-1 overflow-auto pb-[var(--safe-area-inset-bottom)]">{children}</main>
+            <main className="flex-1 overflow-auto pb-[var(--safe-area-inset-bottom)]">
+                {children}
+            </main>
         </div>
     );
 }

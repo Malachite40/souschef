@@ -6,14 +6,14 @@ import {
     OpenAllAmazonFreshButton,
 } from '@/components/recipe/amazon-fresh-links';
 import { IngredientImage } from '@/components/recipe/ingredient-image';
+import { PublicComments } from '@/components/recipe/public-comments';
+import { PublicRating } from '@/components/recipe/public-rating';
 import {
     type InstructionStep,
     InstructionSteps,
 } from '@/components/recipe/recipe-card';
 import { ReviewDialog } from '@/components/recipe/review-dialog';
 import { ServingSelector } from '@/components/recipe/serving-selector';
-import { PublicComments } from '@/components/recipe/public-comments';
-import { PublicRating } from '@/components/recipe/public-rating';
 import { ShareButton } from '@/components/recipe/share-button';
 import {
     estimateIngredientPrice,
@@ -153,7 +153,7 @@ export function RecipeDetail({
                         </div>
                     )}
                 </div>
-            ) : (recipe.slug || actionButtons) ? (
+            ) : recipe.slug || actionButtons ? (
                 <div className="mb-3 flex justify-end gap-2">
                     {actionButtons}
                     {recipe.slug && (

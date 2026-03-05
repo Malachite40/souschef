@@ -103,9 +103,7 @@ export default async function PublicRecipePage({ params }: Props) {
                         publicRating: true,
                         publicComments: true,
                     }}
-                    actionButtons={
-                        <SavePublicRecipeButton recipe={recipe} />
-                    }
+                    actionButtons={<SavePublicRecipeButton recipe={recipe} />}
                     afterTitle={
                         recipe.description ? (
                             <p className="mb-4 text-muted-foreground">

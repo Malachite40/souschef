@@ -80,6 +80,33 @@ export function ChatPanel() {
     const utils = api.useUtils();
     const searchParams = useSearchParams();
     const prefilled = useRef(false);
+    const pendingConversationIdRef = useRef<string | null>(null);
+    const isOnFinishUpdateRef = useRef(false);
+    const streamedThisSessionRef = useRef(false);
+
+    // Freeze the useChat hook ID to prevent flash when conversationId changes
+    // from null → real ID after onFinish. We use a ref so the hook ID stays
+    // stable. When conversationId becomes null (new chat), we update the ref
+    // to a fresh value so the hook resets its message store.
+    const newChatCounter = useRef(0);
+    const chatIdRef = useRef(conversationId ?? `new-${newChatCounter.current}`);
+    const prevConversationId = useRef(conversationId);
+    if (prevConversationId.current !== conversationId) {
+        if (conversationId === null) {
+            // New chat: give useChat a fresh ID so it resets its message store
+            newChatCounter.current += 1;
+            chatIdRef.current = `new-${newChatCounter.current}`;
+        } else if (isOnFinishUpdateRef.current) {
+            // onFinish just assigned the real ID for the current chat session.
+            // Don't update chatIdRef — the messages are already displayed under
+            // the current hook ID and switching would cause a flash.
+        } else {
+            // Switching to a different existing conversation (sidebar click)
+            chatIdRef.current = conversationId;
+        }
+        isOnFinishUpdateRef.current = false;
+        prevConversationId.current = conversationId;
+    }
 
     const { data: session } = authClient.useSession();
     const userName = session?.user?.name ?? undefined;
@@ -104,7 +131,9 @@ export function ChatPanel() {
                     const state = useChatStore.getState();
                     const filterIds = state.activeFilters.map((f) => f.id);
                     return {
-                        conversationId: state.conversationId,
+                        conversationId:
+                            state.conversationId ??
+                            pendingConversationIdRef.current,
                         model: state.model,
                         filters: filterIds.length > 0 ? filterIds : undefined,
                     };
@@ -114,9 +143,20 @@ export function ChatPanel() {
     );
 
     const { messages, sendMessage, setMessages, status, error } = useChat({
-        id: conversationId ?? 'new',
+        id: chatIdRef.current,
         transport,
         onFinish: async () => {
+            if (pendingConversationIdRef.current) {
+                streamedThisSessionRef.current = true;
+                isOnFinishUpdateRef.current = true;
+                setConversationId(pendingConversationIdRef.current);
+                window.history.replaceState(
+                    null,
+                    '',
+                    `/chat/${pendingConversationIdRef.current}`,
+                );
+                pendingConversationIdRef.current = null;
+            }
             utils.chat.listConversations.invalidate();
             utils.chat.listConversationRecipes.invalidate();
         },
@@ -130,6 +170,7 @@ export function ChatPanel() {
 
     useEffect(() => {
         if (!conversationData?.messages) return;
+        if (streamedThisSessionRef.current) return;
         const uiMessages: UIMessage[] = conversationData.messages.map(
             (msg) => ({
                 id: msg.id,
@@ -180,17 +221,12 @@ export function ChatPanel() {
                     title: text.slice(0, 100),
                     model: state.model,
                 });
-                setConversationId(id);
+                pendingConversationIdRef.current = id;
                 utils.chat.listConversations.invalidate();
             }
             sendMessage({ text });
         },
-        [
-            createConversation,
-            setConversationId,
-            sendMessage,
-            utils.chat.listConversations,
-        ],
+        [createConversation, sendMessage, utils.chat.listConversations],
     );
 
     const handleSend = useCallback(
