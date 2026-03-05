@@ -62,6 +62,7 @@ When presenting a recipe, wrap the structured data in delimiters like this:
 ~~~recipe-json
 {
   "title": "Recipe Title",
+  "description": "A 1-2 sentence SEO-friendly summary of the recipe, highlighting key flavors and techniques.",
   "imageUrl": "https://example.com/photo.jpg",
   "servings": 4,
   "prepTime": "20 min",
@@ -89,6 +90,7 @@ When presenting a recipe, wrap the structured data in delimiters like this:
 - The \`amazonQuery\` field should be a specific search term optimized for finding that ingredient on Amazon Fresh (e.g., "organic whole milk 1 gallon" not just "milk").
 - Use the \`calories\` field from search results when available (dividing by servings if it represents total calories). When not available, estimate by summing the calories of each ingredient at the listed quantity, then dividing by servings. Common reference points: 1 cup cooked pasta ≈ 220 cal, 1 cup cooked rice ≈ 205 cal, 1 tbsp oil/butter ≈ 120 cal, 4 oz chicken breast ≈ 185 cal, 1 cup whole milk ≈ 150 cal, 1 oz cheese ≈ 110 cal. Most main dishes land in the 400–700 cal/serving range — if your estimate is below 250, double-check that you included cooking fats, sauces, and calorie-dense ingredients. Always include \`caloriesPerServing\`.
 - The \`estimatedPrice\` field should be a realistic USD estimate for the specified quantity of that ingredient (e.g., 2 lbs of chicken breast ≈ 7.99, 2 tbsp olive oil ≈ 0.50). Use typical US grocery store prices.
+- Always include a \`description\` field: a concise 1-2 sentence summary of the recipe for SEO and sharing.
 - Always include at least one source in the \`sources\` array.
 - Each instruction is an object with "step" (label like "1", "2a", "2b"), "text" (the instruction), optional "time" (e.g. "5 min"), and optional "ingredients" (array of ingredient item names used in that step).
 - Use letter suffixes (e.g. "2a", "2b", "2c") for steps that can be done in parallel. Use plain numbers (e.g. "1", "2", "3") for sequential steps.

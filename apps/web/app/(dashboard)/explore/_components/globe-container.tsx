@@ -25,8 +25,12 @@ export function GlobeContainer() {
                     Explore World Cuisines
                 </h1>
                 <p className="mt-1 text-sm text-muted-foreground">
-                    <span className="hidden md:inline">Hover over a region to discover local recipes</span>
-                    <span className="md:hidden">Tap a region to discover local recipes</span>
+                    <span className="hidden md:inline">
+                        Hover over a region to discover local recipes
+                    </span>
+                    <span className="md:hidden">
+                        Tap a region to discover local recipes
+                    </span>
                 </p>
             </div>
             <GlobeScene />

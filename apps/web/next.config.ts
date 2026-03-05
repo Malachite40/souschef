@@ -3,11 +3,7 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
     devIndicators: false,
-    transpilePackages: [
-        '@yeschefai/ui',
-        '@yeschefai/db',
-        '@yeschefai/trpc',
-    ],
+    transpilePackages: ['@yeschefai/ui', '@yeschefai/db', '@yeschefai/trpc'],
     output: 'standalone',
     outputFileTracingRoot: path.join(__dirname, '../../'),
     images: {

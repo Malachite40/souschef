@@ -19,19 +19,19 @@ function parseFraction(s: string): number {
     const mixedMatch = trimmed.match(/^(\d+)\s+(\d+)\/(\d+)$/);
     if (mixedMatch) {
         return (
-            parseInt(mixedMatch[1]) +
-            parseInt(mixedMatch[2]) / parseInt(mixedMatch[3])
+            Number.parseInt(mixedMatch[1]) +
+            Number.parseInt(mixedMatch[2]) / Number.parseInt(mixedMatch[3])
         );
     }
 
     // Simple fraction: "1/2"
     const fracMatch = trimmed.match(/^(\d+)\/(\d+)$/);
     if (fracMatch) {
-        return parseInt(fracMatch[1]) / parseInt(fracMatch[2]);
+        return Number.parseInt(fracMatch[1]) / Number.parseInt(fracMatch[2]);
     }
 
     // Decimal or integer
-    const num = parseFloat(trimmed);
+    const num = Number.parseFloat(trimmed);
     return isNaN(num) ? 0 : num;
 }
 

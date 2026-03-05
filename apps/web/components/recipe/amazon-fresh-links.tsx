@@ -1,7 +1,12 @@
 'use client';
 
 import { Button } from '@yeschefai/ui/components/button';
-import { CheckIcon, CopyIcon, ExternalLinkIcon, ShoppingCartIcon } from 'lucide-react';
+import {
+    CheckIcon,
+    CopyIcon,
+    ExternalLinkIcon,
+    ShoppingCartIcon,
+} from 'lucide-react';
 import { useCallback, useState } from 'react';
 
 interface Ingredient {

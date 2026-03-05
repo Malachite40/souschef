@@ -10,7 +10,7 @@ import { authClient } from '@/lib/auth-client';
 import { useChatStore } from '@/stores/chat-store';
 import { api } from '@/trpc/react';
 import { useChat } from '@ai-sdk/react';
-import { type UIMessage, DefaultChatTransport } from 'ai';
+import { DefaultChatTransport, type UIMessage } from 'ai';
 import { ArrowDownIcon, ChefHatIcon } from 'lucide-react';
 import { useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';

@@ -17,7 +17,12 @@ const sizeClasses = {
     md: 'size-5',
 };
 
-function StarRating({ value, onChange, size = 'sm', className }: StarRatingProps) {
+function StarRating({
+    value,
+    onChange,
+    size = 'sm',
+    className,
+}: StarRatingProps) {
     const [hovered, setHovered] = useState(0);
     const interactive = !!onChange;
     const displayValue = hovered || value;
@@ -34,9 +39,12 @@ function StarRating({ value, onChange, size = 'sm', className }: StarRatingProps
                     disabled={!interactive}
                     className={cn(
                         'transition-colors disabled:cursor-default',
-                        interactive && 'cursor-pointer hover:scale-110 transition-transform',
+                        interactive &&
+                            'cursor-pointer hover:scale-110 transition-transform',
                     )}
-                    onMouseEnter={interactive ? () => setHovered(star) : undefined}
+                    onMouseEnter={
+                        interactive ? () => setHovered(star) : undefined
+                    }
                     onClick={interactive ? () => onChange(star) : undefined}
                 >
                     <StarIcon

@@ -24,7 +24,8 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
     title: 'YesChef AI',
-    description: 'AI-powered recipe assistant with web search and Amazon Fresh links',
+    description:
+        'AI-powered recipe assistant with web search and Amazon Fresh links',
 };
 
 export default function RootLayout({

@@ -10,17 +10,17 @@ export function parseTimeToMinutes(time: string | null | undefined): number {
 
     const hourMatch = normalized.match(/(\d+(?:\.\d+)?)\s*(?:hr|hour)s?/);
     if (hourMatch) {
-        total += parseFloat(hourMatch[1]!) * 60;
+        total += Number.parseFloat(hourMatch[1]!) * 60;
     }
 
     const minMatch = normalized.match(/(\d+(?:\.\d+)?)\s*(?:min|minute)s?/);
     if (minMatch) {
-        total += parseFloat(minMatch[1]!);
+        total += Number.parseFloat(minMatch[1]!);
     }
 
     // If no hr/min pattern matched, try parsing as a bare number (assume minutes)
     if (total === 0) {
-        const bare = parseFloat(normalized);
+        const bare = Number.parseFloat(normalized);
         if (!isNaN(bare)) total = bare;
     }
 

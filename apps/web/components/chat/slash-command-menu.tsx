@@ -1,8 +1,8 @@
 'use client';
 
 import {
-    filterSlashCommands,
     type SlashCommand,
+    filterSlashCommands,
 } from '@/lib/data/slash-commands';
 import { useEffect, useRef, useState } from 'react';
 
@@ -49,7 +49,9 @@ export function SlashCommandMenu({
                 } else if (e.key === 'Escape') {
                     e.preventDefault();
                     setExpandedCommand(null);
-                    setActiveIndex(filtered.findIndex((c) => c.name === expandedCommand));
+                    setActiveIndex(
+                        filtered.findIndex((c) => c.name === expandedCommand),
+                    );
                 }
                 return;
             }
@@ -118,7 +120,11 @@ export function SlashCommandMenu({
                         className="text-xs text-muted-foreground hover:text-foreground"
                         onClick={() => {
                             setExpandedCommand(null);
-                            setActiveIndex(filtered.findIndex((c) => c.name === expandedCommand));
+                            setActiveIndex(
+                                filtered.findIndex(
+                                    (c) => c.name === expandedCommand,
+                                ),
+                            );
                         }}
                     >
                         &larr; /{cmd.name}
@@ -177,7 +183,9 @@ export function SlashCommandMenu({
                         </span>
                     </div>
                     {cmd.subCommands && (
-                        <span className="text-xs text-muted-foreground">&rsaquo;</span>
+                        <span className="text-xs text-muted-foreground">
+                            &rsaquo;
+                        </span>
                     )}
                 </button>
             ))}

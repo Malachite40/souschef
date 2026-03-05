@@ -5,6 +5,7 @@ import {
     pgTable,
     text,
     timestamp,
+    unique,
     uuid,
 } from 'drizzle-orm/pg-core';
 
@@ -128,35 +129,82 @@ export const savedRecipes = pgTable('saved_recipes', {
         { onDelete: 'set null' },
     ),
     title: text('title').notNull(),
+    slug: text('slug').unique(),
+    description: text('description'),
     imageUrl: text('image_url'),
     servings: integer('servings').default(4),
     prepTime: text('prep_time'),
     cookTime: text('cook_time'),
     caloriesPerServing: integer('calories_per_serving'),
-    ingredients: jsonb('ingredients').$type<
-        Array<{
-            item: string;
-            quantity: string;
-            unit: string;
-            amazonQuery: string;
-            estimatedPrice?: number;
-        }>
-    >(),
-    instructions: jsonb('instructions').$type<
-        Array<{
-            step: string;
-            text: string;
-            time?: string;
-            ingredients?: string[];
-        }>
-    >(),
-    sources: jsonb('sources').$type<
-        Array<{
-            title: string;
-            url: string;
-        }>
-    >(),
+    ingredients:
+        jsonb('ingredients').$type<
+            Array<{
+                item: string;
+                quantity: string;
+                unit: string;
+                amazonQuery: string;
+                estimatedPrice?: number;
+            }>
+        >(),
+    instructions:
+        jsonb('instructions').$type<
+            Array<{
+                step: string;
+                text: string;
+                time?: string;
+                ingredients?: string[];
+            }>
+        >(),
+    sources:
+        jsonb('sources').$type<
+            Array<{
+                title: string;
+                url: string;
+            }>
+        >(),
     rating: integer('rating'),
     notes: text('notes'),
     createdAt: timestamp('created_at', { mode: 'date' }).notNull().defaultNow(),
 });
+
+// ──────────────────────────────────────────────
+// Recipe Comments
+// ──────────────────────────────────────────────
+
+export const recipeComments = pgTable('recipe_comments', {
+    id: uuid('id')
+        .primaryKey()
+        .$defaultFn(() => crypto.randomUUID()),
+    recipeId: uuid('recipe_id')
+        .notNull()
+        .references(() => savedRecipes.id, { onDelete: 'cascade' }),
+    userId: text('user_id')
+        .notNull()
+        .references(() => user.id, { onDelete: 'cascade' }),
+    content: text('content').notNull(),
+    createdAt: timestamp('created_at', { mode: 'date' }).notNull().defaultNow(),
+});
+
+// ──────────────────────────────────────────────
+// Recipe Ratings
+// ──────────────────────────────────────────────
+
+export const recipeRatings = pgTable(
+    'recipe_ratings',
+    {
+        id: uuid('id')
+            .primaryKey()
+            .$defaultFn(() => crypto.randomUUID()),
+        recipeId: uuid('recipe_id')
+            .notNull()
+            .references(() => savedRecipes.id, { onDelete: 'cascade' }),
+        userId: text('user_id')
+            .notNull()
+            .references(() => user.id, { onDelete: 'cascade' }),
+        rating: integer('rating').notNull(),
+        createdAt: timestamp('created_at', { mode: 'date' })
+            .notNull()
+            .defaultNow(),
+    },
+    (t) => [unique().on(t.recipeId, t.userId)],
+);

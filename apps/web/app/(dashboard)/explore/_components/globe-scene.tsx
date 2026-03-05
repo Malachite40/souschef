@@ -12,9 +12,21 @@ const COUNTRIES_GEOJSON_URL =
 
 // Soft pastel palette for country polygons
 const LAND_COLORS = [
-    '#b5d6a7', '#f7d9a0', '#a7c7d6', '#f0c4a8', '#c7b5d6',
-    '#a7d6c2', '#d6c7a7', '#c2d6a7', '#d6a7b5', '#a7b5d6',
-    '#d6d6a7', '#c7d6b5', '#d6b5c7', '#b5c7d6', '#d6c2a7',
+    '#b5d6a7',
+    '#f7d9a0',
+    '#a7c7d6',
+    '#f0c4a8',
+    '#c7b5d6',
+    '#a7d6c2',
+    '#d6c7a7',
+    '#c2d6a7',
+    '#d6a7b5',
+    '#a7b5d6',
+    '#d6d6a7',
+    '#c7d6b5',
+    '#d6b5c7',
+    '#b5c7d6',
+    '#d6c2a7',
 ];
 
 export default function GlobeScene() {
@@ -96,7 +108,7 @@ export default function GlobeScene() {
     // Deterministic pastel color per country
     const getCountryColor = useCallback((feat: any) => {
         const idx = feat.properties?.ISO_N3
-            ? parseInt(feat.properties.ISO_N3, 10) % LAND_COLORS.length
+            ? Number.parseInt(feat.properties.ISO_N3, 10) % LAND_COLORS.length
             : Math.abs((feat.properties?.NAME || '').length) %
               LAND_COLORS.length;
         return LAND_COLORS[idx];

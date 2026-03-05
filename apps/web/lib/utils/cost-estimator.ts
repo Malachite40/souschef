@@ -210,7 +210,7 @@ function getUnitMultiplier(unit: string): number {
 }
 
 function getQuantityMultiplier(quantity: string): number {
-    const num = parseFloat(quantity);
+    const num = Number.parseFloat(quantity);
     if (isNaN(num) || num <= 0) return 1;
     return num;
 }
@@ -230,10 +230,18 @@ export function estimateIngredientPrice(ingredient: Ingredient): number {
             (key) => item.includes(key) || key.includes(item),
         );
         const price = partialMatch ? PRICE_LOOKUP[partialMatch]! : 1.5; // default fallback
-        return price * getUnitMultiplier(ingredient.unit) * getQuantityMultiplier(ingredient.quantity);
+        return (
+            price *
+            getUnitMultiplier(ingredient.unit) *
+            getQuantityMultiplier(ingredient.quantity)
+        );
     }
 
-    return basePrice * getUnitMultiplier(ingredient.unit) * getQuantityMultiplier(ingredient.quantity);
+    return (
+        basePrice *
+        getUnitMultiplier(ingredient.unit) *
+        getQuantityMultiplier(ingredient.quantity)
+    );
 }
 
 export function estimateTotalCost(ingredients: Ingredient[]): number {

@@ -8,7 +8,9 @@ import { cn } from '@yeschefai/ui/lib/utils';
 function TooltipProvider({
     ...props
 }: React.ComponentProps<typeof TooltipPrimitive.Provider>) {
-    return <TooltipPrimitive.Provider data-slot="tooltip-provider" {...props} />;
+    return (
+        <TooltipPrimitive.Provider data-slot="tooltip-provider" {...props} />
+    );
 }
 
 function Tooltip({

@@ -1,19 +1,24 @@
 'use client';
 
-import { useChatStore } from '@/stores/chat-store';
 import {
     AVAILABLE_FILTERS,
     FILTER_GROUP_LABELS,
     type FilterGroup,
 } from '@/lib/data/filter-data';
+import { useChatStore } from '@/stores/chat-store';
 import { Button } from '@yeschefai/ui/components/button';
 import { FilterIcon, XIcon } from 'lucide-react';
 
 const GROUPS: FilterGroup[] = ['dietary', 'time', 'difficulty'];
 
 export function FilterChips() {
-    const { activeFilters, filtersExpanded, toggleFilter, clearFilters, setFiltersExpanded } =
-        useChatStore();
+    const {
+        activeFilters,
+        filtersExpanded,
+        toggleFilter,
+        clearFilters,
+        setFiltersExpanded,
+    } = useChatStore();
 
     return (
         <div className="space-y-2">
@@ -55,30 +60,30 @@ export function FilterChips() {
                                 {FILTER_GROUP_LABELS[group]}
                             </p>
                             <div className="flex flex-wrap gap-1.5">
-                                {AVAILABLE_FILTERS.filter((f) => f.group === group).map(
-                                    (filter) => {
-                                        const isActive = activeFilters.some(
-                                            (f) => f.id === filter.id,
-                                        );
-                                        return (
-                                            <button
-                                                type="button"
-                                                key={filter.id}
-                                                className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs transition-colors ${
-                                                    isActive
-                                                        ? 'bg-primary text-primary-foreground'
-                                                        : 'border bg-background hover:bg-accent'
-                                                }`}
-                                                onClick={() => toggleFilter(filter)}
-                                            >
-                                                <span className="text-xs leading-none">
-                                                    {filter.icon}
-                                                </span>
-                                                {filter.label}
-                                            </button>
-                                        );
-                                    },
-                                )}
+                                {AVAILABLE_FILTERS.filter(
+                                    (f) => f.group === group,
+                                ).map((filter) => {
+                                    const isActive = activeFilters.some(
+                                        (f) => f.id === filter.id,
+                                    );
+                                    return (
+                                        <button
+                                            type="button"
+                                            key={filter.id}
+                                            className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs transition-colors ${
+                                                isActive
+                                                    ? 'bg-primary text-primary-foreground'
+                                                    : 'border bg-background hover:bg-accent'
+                                            }`}
+                                            onClick={() => toggleFilter(filter)}
+                                        >
+                                            <span className="text-xs leading-none">
+                                                {filter.icon}
+                                            </span>
+                                            {filter.label}
+                                        </button>
+                                    );
+                                })}
                             </div>
                         </div>
                     ))}

@@ -1,6 +1,12 @@
 type TimeOfDay = 'morning' | 'afternoon' | 'evening';
 
-type SuggestionCategory = 'quick' | 'comfort' | 'healthy' | 'dessert' | 'world' | 'classic';
+type SuggestionCategory =
+    | 'quick'
+    | 'comfort'
+    | 'healthy'
+    | 'dessert'
+    | 'world'
+    | 'classic';
 
 interface Suggestion {
     label: string;
@@ -11,46 +17,196 @@ interface Suggestion {
 
 const SUGGESTION_POOL: Suggestion[] = [
     // Quick meals
-    { label: '15-minute stir fry', icon: '🥘', category: 'quick', timeOfDay: ['afternoon', 'evening'] },
-    { label: 'Easy quesadillas', icon: '🫔', category: 'quick', timeOfDay: ['afternoon', 'evening'] },
-    { label: 'One-pot pasta', icon: '🍝', category: 'quick', timeOfDay: ['afternoon', 'evening'] },
-    { label: 'Quick fried rice', icon: '🍚', category: 'quick', timeOfDay: ['afternoon', 'evening'] },
-    { label: 'Sheet pan chicken', icon: '🍗', category: 'quick', timeOfDay: ['evening'] },
+    {
+        label: '15-minute stir fry',
+        icon: '🥘',
+        category: 'quick',
+        timeOfDay: ['afternoon', 'evening'],
+    },
+    {
+        label: 'Easy quesadillas',
+        icon: '🫔',
+        category: 'quick',
+        timeOfDay: ['afternoon', 'evening'],
+    },
+    {
+        label: 'One-pot pasta',
+        icon: '🍝',
+        category: 'quick',
+        timeOfDay: ['afternoon', 'evening'],
+    },
+    {
+        label: 'Quick fried rice',
+        icon: '🍚',
+        category: 'quick',
+        timeOfDay: ['afternoon', 'evening'],
+    },
+    {
+        label: 'Sheet pan chicken',
+        icon: '🍗',
+        category: 'quick',
+        timeOfDay: ['evening'],
+    },
 
     // Comfort food
-    { label: 'Homemade ramen', icon: '🍜', category: 'comfort', timeOfDay: ['afternoon', 'evening'] },
-    { label: 'Mac and cheese', icon: '🧀', category: 'comfort', timeOfDay: ['afternoon', 'evening'] },
-    { label: 'Beef stew', icon: '🥩', category: 'comfort', timeOfDay: ['evening'] },
-    { label: 'Chicken pot pie', icon: '🥧', category: 'comfort', timeOfDay: ['evening'] },
-    { label: 'Grilled cheese & tomato soup', icon: '🍅', category: 'comfort', timeOfDay: ['afternoon'] },
+    {
+        label: 'Homemade ramen',
+        icon: '🍜',
+        category: 'comfort',
+        timeOfDay: ['afternoon', 'evening'],
+    },
+    {
+        label: 'Mac and cheese',
+        icon: '🧀',
+        category: 'comfort',
+        timeOfDay: ['afternoon', 'evening'],
+    },
+    {
+        label: 'Beef stew',
+        icon: '🥩',
+        category: 'comfort',
+        timeOfDay: ['evening'],
+    },
+    {
+        label: 'Chicken pot pie',
+        icon: '🥧',
+        category: 'comfort',
+        timeOfDay: ['evening'],
+    },
+    {
+        label: 'Grilled cheese & tomato soup',
+        icon: '🍅',
+        category: 'comfort',
+        timeOfDay: ['afternoon'],
+    },
 
     // Healthy
-    { label: 'Quinoa buddha bowl', icon: '🥗', category: 'healthy', timeOfDay: ['afternoon', 'evening'] },
-    { label: 'Salmon with veggies', icon: '🐟', category: 'healthy', timeOfDay: ['evening'] },
-    { label: 'Greek salad wrap', icon: '🥙', category: 'healthy', timeOfDay: ['afternoon'] },
-    { label: 'Smoothie bowl', icon: '🫐', category: 'healthy', timeOfDay: ['morning'] },
-    { label: 'Zucchini noodles', icon: '🥒', category: 'healthy', timeOfDay: ['afternoon', 'evening'] },
+    {
+        label: 'Quinoa buddha bowl',
+        icon: '🥗',
+        category: 'healthy',
+        timeOfDay: ['afternoon', 'evening'],
+    },
+    {
+        label: 'Salmon with veggies',
+        icon: '🐟',
+        category: 'healthy',
+        timeOfDay: ['evening'],
+    },
+    {
+        label: 'Greek salad wrap',
+        icon: '🥙',
+        category: 'healthy',
+        timeOfDay: ['afternoon'],
+    },
+    {
+        label: 'Smoothie bowl',
+        icon: '🫐',
+        category: 'healthy',
+        timeOfDay: ['morning'],
+    },
+    {
+        label: 'Zucchini noodles',
+        icon: '🥒',
+        category: 'healthy',
+        timeOfDay: ['afternoon', 'evening'],
+    },
 
     // Desserts
-    { label: 'Chocolate lava cake', icon: '🍫', category: 'dessert', timeOfDay: ['afternoon', 'evening'] },
-    { label: 'Banana bread', icon: '🍌', category: 'dessert', timeOfDay: ['morning', 'afternoon'] },
-    { label: 'Crème brûlée', icon: '🍮', category: 'dessert', timeOfDay: ['evening'] },
-    { label: 'Apple pie', icon: '🥧', category: 'dessert', timeOfDay: ['afternoon', 'evening'] },
-    { label: 'Pancakes from scratch', icon: '🥞', category: 'dessert', timeOfDay: ['morning'] },
+    {
+        label: 'Chocolate lava cake',
+        icon: '🍫',
+        category: 'dessert',
+        timeOfDay: ['afternoon', 'evening'],
+    },
+    {
+        label: 'Banana bread',
+        icon: '🍌',
+        category: 'dessert',
+        timeOfDay: ['morning', 'afternoon'],
+    },
+    {
+        label: 'Crème brûlée',
+        icon: '🍮',
+        category: 'dessert',
+        timeOfDay: ['evening'],
+    },
+    {
+        label: 'Apple pie',
+        icon: '🥧',
+        category: 'dessert',
+        timeOfDay: ['afternoon', 'evening'],
+    },
+    {
+        label: 'Pancakes from scratch',
+        icon: '🥞',
+        category: 'dessert',
+        timeOfDay: ['morning'],
+    },
 
     // World cuisine
-    { label: 'Pad thai', icon: '🇹🇭', category: 'world', timeOfDay: ['afternoon', 'evening'] },
-    { label: 'Chicken tikka masala', icon: '🇮🇳', category: 'world', timeOfDay: ['evening'] },
-    { label: 'Tacos al pastor', icon: '🇲🇽', category: 'world', timeOfDay: ['afternoon', 'evening'] },
-    { label: 'Japanese gyoza', icon: '🇯🇵', category: 'world', timeOfDay: ['afternoon', 'evening'] },
-    { label: 'Shakshuka', icon: '🍳', category: 'world', timeOfDay: ['morning', 'afternoon'] },
+    {
+        label: 'Pad thai',
+        icon: '🇹🇭',
+        category: 'world',
+        timeOfDay: ['afternoon', 'evening'],
+    },
+    {
+        label: 'Chicken tikka masala',
+        icon: '🇮🇳',
+        category: 'world',
+        timeOfDay: ['evening'],
+    },
+    {
+        label: 'Tacos al pastor',
+        icon: '🇲🇽',
+        category: 'world',
+        timeOfDay: ['afternoon', 'evening'],
+    },
+    {
+        label: 'Japanese gyoza',
+        icon: '🇯🇵',
+        category: 'world',
+        timeOfDay: ['afternoon', 'evening'],
+    },
+    {
+        label: 'Shakshuka',
+        icon: '🍳',
+        category: 'world',
+        timeOfDay: ['morning', 'afternoon'],
+    },
 
     // Classics
-    { label: 'Chicken parmesan', icon: '🍗', category: 'classic', timeOfDay: ['evening'] },
-    { label: 'Spaghetti bolognese', icon: '🍝', category: 'classic', timeOfDay: ['evening'] },
-    { label: 'Caesar salad', icon: '🥬', category: 'classic', timeOfDay: ['afternoon'] },
-    { label: 'French omelette', icon: '🥚', category: 'classic', timeOfDay: ['morning'] },
-    { label: 'Burgers from scratch', icon: '🍔', category: 'classic', timeOfDay: ['afternoon', 'evening'] },
+    {
+        label: 'Chicken parmesan',
+        icon: '🍗',
+        category: 'classic',
+        timeOfDay: ['evening'],
+    },
+    {
+        label: 'Spaghetti bolognese',
+        icon: '🍝',
+        category: 'classic',
+        timeOfDay: ['evening'],
+    },
+    {
+        label: 'Caesar salad',
+        icon: '🥬',
+        category: 'classic',
+        timeOfDay: ['afternoon'],
+    },
+    {
+        label: 'French omelette',
+        icon: '🥚',
+        category: 'classic',
+        timeOfDay: ['morning'],
+    },
+    {
+        label: 'Burgers from scratch',
+        icon: '🍔',
+        category: 'classic',
+        timeOfDay: ['afternoon', 'evening'],
+    },
 ];
 
 function getCurrentTimeOfDay(): TimeOfDay {

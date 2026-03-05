@@ -25,7 +25,9 @@ export function SuggestionChips({ onSend }: SuggestionChipsProps) {
                     className="inline-flex items-center gap-1.5 rounded-full border bg-card px-3 py-1.5 text-sm transition-colors hover:bg-accent hover:border-accent-foreground/20 active:scale-[0.97]"
                     onClick={() => onSend(suggestion.label)}
                 >
-                    <span className="text-base leading-none">{suggestion.icon}</span>
+                    <span className="text-base leading-none">
+                        {suggestion.icon}
+                    </span>
                     {suggestion.label}
                 </button>
             ))}

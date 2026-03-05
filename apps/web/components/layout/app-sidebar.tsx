@@ -8,11 +8,7 @@ import {
     TooltipContent,
     TooltipTrigger,
 } from '@yeschefai/ui/components/tooltip';
-import {
-    ChefHatIcon,
-    MessageSquarePlusIcon,
-    Trash2Icon,
-} from 'lucide-react';
+import { ChefHatIcon, MessageSquarePlusIcon, Trash2Icon } from 'lucide-react';
 export interface SidebarContentProps {
     conversations:
         | Array<{ id: string; title: string | null; model: string | null }>

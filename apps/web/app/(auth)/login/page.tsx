@@ -10,17 +10,22 @@ async function handleNativeSignIn() {
 
     const exchange = crypto.randomUUID();
 
-    const response = await authClient.signIn.social({
-        provider: 'google',
-        callbackURL: `/api/auth/native-callback?exchange=${exchange}`,
-        disableRedirect: true,
-    }, {
-        throw: true,
-    });
+    const response = await authClient.signIn.social(
+        {
+            provider: 'google',
+            callbackURL: `/api/auth/native-callback?exchange=${exchange}`,
+            disableRedirect: true,
+        },
+        {
+            throw: true,
+        },
+    );
 
     if (response.url) {
         Browser.addListener('browserFinished', async () => {
-            const res = await fetch(`/api/auth/claim-session?exchange=${exchange}`);
+            const res = await fetch(
+                `/api/auth/claim-session?exchange=${exchange}`,
+            );
             if (res.ok) {
                 const { token } = await res.json();
                 document.cookie = `better-auth.session_token=${token}; path=/; max-age=604800`;
@@ -49,7 +54,9 @@ export default function LoginPage() {
             <div className="w-full max-w-sm space-y-6 rounded-lg border bg-card p-8">
                 <div className="text-center">
                     <ChefHatIcon className="mx-auto mb-3 size-10 text-primary" />
-                    <h1 className="font-serif text-3xl text-primary">YesChef AI</h1>
+                    <h1 className="font-serif text-3xl text-primary">
+                        YesChef AI
+                    </h1>
                     <p className="mt-2 text-sm text-muted-foreground">
                         AI-powered recipe assistant
                     </p>

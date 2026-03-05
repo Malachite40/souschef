@@ -12,12 +12,12 @@ import { useChatStore } from '@/stores/chat-store';
 import { Button } from '@yeschefai/ui/components/button';
 import { FilterIcon, SendIcon, XIcon } from 'lucide-react';
 import {
+    type ClipboardEvent,
+    type KeyboardEvent,
     useCallback,
     useEffect,
     useRef,
     useState,
-    type ClipboardEvent,
-    type KeyboardEvent,
 } from 'react';
 
 const URL_REGEX = /https?:\/\/[^\s]+/;
@@ -45,8 +45,13 @@ export function ChatInput({
     const [slashQuery, setSlashQuery] = useState('');
     const [detectedUrl, setDetectedUrl] = useState<string | null>(null);
 
-    const { activeFilters, filtersExpanded, toggleFilter, clearFilters, setFiltersExpanded } =
-        useChatStore();
+    const {
+        activeFilters,
+        filtersExpanded,
+        toggleFilter,
+        clearFilters,
+        setFiltersExpanded,
+    } = useChatStore();
 
     // Detect slash command trigger
     useEffect(() => {
@@ -118,7 +123,10 @@ export function ChatInput({
                         const el = textareaRef.current;
                         if (el) {
                             el.focus();
-                            el.setSelectionRange(placeholderIndex, placeholderIndex);
+                            el.setSelectionRange(
+                                placeholderIndex,
+                                placeholderIndex,
+                            );
                         }
                     }, 0);
                 } else {
@@ -188,30 +196,32 @@ export function ChatInput({
                                         {FILTER_GROUP_LABELS[group]}
                                     </p>
                                     <div className="flex flex-wrap gap-1.5">
-                                        {AVAILABLE_FILTERS.filter((f) => f.group === group).map(
-                                            (filter) => {
-                                                const isActive = activeFilters.some(
-                                                    (f) => f.id === filter.id,
-                                                );
-                                                return (
-                                                    <button
-                                                        type="button"
-                                                        key={filter.id}
-                                                        className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs transition-colors ${
-                                                            isActive
-                                                                ? 'bg-primary text-primary-foreground'
-                                                                : 'border bg-background hover:bg-accent'
-                                                        }`}
-                                                        onClick={() => toggleFilter(filter)}
-                                                    >
-                                                        <span className="text-xs leading-none">
-                                                            {filter.icon}
-                                                        </span>
-                                                        {filter.label}
-                                                    </button>
-                                                );
-                                            },
-                                        )}
+                                        {AVAILABLE_FILTERS.filter(
+                                            (f) => f.group === group,
+                                        ).map((filter) => {
+                                            const isActive = activeFilters.some(
+                                                (f) => f.id === filter.id,
+                                            );
+                                            return (
+                                                <button
+                                                    type="button"
+                                                    key={filter.id}
+                                                    className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs transition-colors ${
+                                                        isActive
+                                                            ? 'bg-primary text-primary-foreground'
+                                                            : 'border bg-background hover:bg-accent'
+                                                    }`}
+                                                    onClick={() =>
+                                                        toggleFilter(filter)
+                                                    }
+                                                >
+                                                    <span className="text-xs leading-none">
+                                                        {filter.icon}
+                                                    </span>
+                                                    {filter.label}
+                                                </button>
+                                            );
+                                        })}
                                     </div>
                                 </div>
                             ))}
@@ -239,7 +249,9 @@ export function ChatInput({
                                         ? 'bg-muted text-foreground'
                                         : 'text-muted-foreground hover:bg-muted hover:text-foreground'
                                 }`}
-                                onClick={() => setFiltersExpanded(!filtersExpanded)}
+                                onClick={() =>
+                                    setFiltersExpanded(!filtersExpanded)
+                                }
                             >
                                 <FilterIcon className="size-3" />
                                 Filters
@@ -277,7 +289,9 @@ export function ChatInput({
                                 type="button"
                                 size="icon"
                                 className="size-7 shrink-0 rounded-lg"
-                                disabled={!value.trim() || disabled || isOverLimit}
+                                disabled={
+                                    !value.trim() || disabled || isOverLimit
+                                }
                                 onClick={() => onSend()}
                             >
                                 <SendIcon className="size-3.5" />

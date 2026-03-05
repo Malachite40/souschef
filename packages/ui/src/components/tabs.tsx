@@ -5,9 +5,7 @@ import type * as React from 'react';
 
 import { cn } from '@yeschefai/ui/lib/utils';
 
-function Tabs({
-    ...props
-}: React.ComponentProps<typeof TabsPrimitive.Root>) {
+function Tabs({ ...props }: React.ComponentProps<typeof TabsPrimitive.Root>) {
     return <TabsPrimitive.Root data-slot="tabs" {...props} />;
 }
 

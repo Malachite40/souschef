@@ -32,7 +32,6 @@ import {
     DollarSignIcon,
     ExternalLinkIcon,
     FlameIcon,
-    UsersIcon,
 } from 'lucide-react';
 import { useCallback, useMemo, useState } from 'react';
 
@@ -45,6 +44,7 @@ export interface InstructionStep {
 
 export interface RecipeData {
     title: string;
+    description?: string;
     imageUrl?: string;
     servings: number;
     prepTime: string;
@@ -91,7 +91,7 @@ export function RecipeCard({ recipe, conversationId }: RecipeCardProps) {
     const utils = api.useUtils();
 
     const savedList = api.recipes.list.useQuery(undefined, {
-        staleTime: Infinity,
+        staleTime: Number.POSITIVE_INFINITY,
     });
     const savedEntry = useMemo(
         () => savedList.data?.find((r) => r.title === recipe.title) ?? null,
@@ -113,7 +113,8 @@ export function RecipeCard({ recipe, conversationId }: RecipeCardProps) {
         },
     });
 
-    const saved = (!!savedEntry && !deleteRecipe.isSuccess) || saveRecipe.isSuccess;
+    const saved =
+        (!!savedEntry && !deleteRecipe.isSuccess) || saveRecipe.isSuccess;
 
     const handleToggleSave = useCallback(() => {
         if (saveRecipe.isPending || deleteRecipe.isPending) return;
@@ -123,6 +124,7 @@ export function RecipeCard({ recipe, conversationId }: RecipeCardProps) {
             saveRecipe.mutate({
                 conversationId,
                 title: recipe.title,
+                description: recipe.description,
                 imageUrl: recipe.imageUrl,
                 servings: recipe.servings,
                 prepTime: recipe.prepTime,
@@ -151,7 +153,9 @@ export function RecipeCard({ recipe, conversationId }: RecipeCardProps) {
                         size="xs"
                         variant={saved ? 'secondary' : 'default'}
                         onClick={handleToggleSave}
-                        disabled={saveRecipe.isPending || deleteRecipe.isPending}
+                        disabled={
+                            saveRecipe.isPending || deleteRecipe.isPending
+                        }
                         className="shrink-0 gap-1"
                     >
                         {saved ? (
@@ -220,7 +224,10 @@ export function RecipeCard({ recipe, conversationId }: RecipeCardProps) {
                                     />
                                     <span className="flex-1">
                                         <span className="font-medium">
-                                            {scaleQuantity(ingredient.quantity, scaleFactor)}{' '}
+                                            {scaleQuantity(
+                                                ingredient.quantity,
+                                                scaleFactor,
+                                            )}{' '}
                                             {ingredient.unit}
                                         </span>{' '}
                                         {ingredient.item}
@@ -241,9 +248,7 @@ export function RecipeCard({ recipe, conversationId }: RecipeCardProps) {
                     </TabsContent>
 
                     <TabsContent value="instructions">
-                        <InstructionSteps
-                            instructions={recipe.instructions}
-                        />
+                        <InstructionSteps instructions={recipe.instructions} />
                     </TabsContent>
                 </Tabs>
 
@@ -289,9 +294,7 @@ function normalizeInstructions(
     raw: (string | InstructionStep)[],
 ): InstructionStep[] {
     return raw.map((item, i) =>
-        typeof item === 'string'
-            ? { step: String(i + 1), text: item }
-            : item,
+        typeof item === 'string' ? { step: String(i + 1), text: item } : item,
     );
 }
 
@@ -302,9 +305,7 @@ function stepPrefix(step: string): string {
 }
 
 /** Group steps: sequential steps are solo groups, parallel steps (same prefix) are grouped */
-function groupSteps(
-    steps: InstructionStep[],
-): InstructionStep[][] {
+function groupSteps(steps: InstructionStep[]): InstructionStep[][] {
     const groups: InstructionStep[][] = [];
     let i = 0;
     while (i < steps.length) {

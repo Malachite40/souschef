@@ -1,8 +1,8 @@
 {
-  "name": "scraper",
-  "version": "0.0.1",
-  "private": true,
-  "scripts": {
-    "dev": "uv run uvicorn app.main:app --reload --port 8001"
-  }
+    "name": "scraper",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+        "dev": "uv run uvicorn app.main:app --reload --port 8001"
+    }
 }

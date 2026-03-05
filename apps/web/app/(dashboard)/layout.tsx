@@ -1,7 +1,7 @@
 import { auth } from '@/auth';
-import { HeaderActions } from '@/components/layout/header-actions';
 import { AppSidebar } from '@/components/layout/app-sidebar';
 import { DashboardHeader } from '@/components/layout/dashboard-header';
+import { HeaderActions } from '@/components/layout/header-actions';
 import { MobileNav } from '@/components/layout/mobile-nav';
 import { UserAvatar } from '@/components/ui/user-avatar';
 import { ChefHatIcon } from 'lucide-react';
@@ -39,7 +39,9 @@ export default async function DashboardLayout({
                     />
                     <Link href="/chat" className="flex items-center gap-2">
                         <ChefHatIcon className="size-5 text-primary" />
-                        <span className="font-serif text-xl leading-none text-primary">YesChef AI</span>
+                        <span className="font-serif text-xl leading-none text-primary">
+                            YesChef AI
+                        </span>
                     </Link>
                     <nav className="ml-8 hidden items-center gap-4 md:flex">
                         {navItems.map((item) => (
@@ -58,7 +60,11 @@ export default async function DashboardLayout({
                             {session.user.name ?? session.user.email}
                         </span>
                         <div className="hidden md:block">
-                            <UserAvatar name={session.user.name} image={session.user.image} size="md" />
+                            <UserAvatar
+                                name={session.user.name}
+                                image={session.user.image}
+                                size="md"
+                            />
                         </div>
                     </div>
                 </div>

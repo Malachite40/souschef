@@ -1,11 +1,11 @@
 'use client';
 
 import {
-    useRecipesStore,
-    type SortBy,
-    type TimeFilter,
     type CostFilter,
     type RatingFilter,
+    type SortBy,
+    type TimeFilter,
+    useRecipesStore,
 } from '@/stores/recipes-store';
 import { Button } from '@yeschefai/ui/components/button';
 import { Input } from '@yeschefai/ui/components/input';
@@ -105,9 +105,7 @@ export function RecipeToolbar() {
 
                 <Select
                     value={ratingFilter}
-                    onValueChange={(v) =>
-                        setRatingFilter(v as RatingFilter)
-                    }
+                    onValueChange={(v) => setRatingFilter(v as RatingFilter)}
                 >
                     <SelectTrigger size="sm">
                         <SelectValue />

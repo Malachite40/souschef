@@ -81,7 +81,10 @@ export function filterRecipes<T extends RecipeBase>(
         if (ratingFilter !== 'all') {
             if (ratingFilter === 'rated' && !recipe.rating) return false;
             if (ratingFilter === 'unrated' && recipe.rating) return false;
-            if (ratingFilter === '4-plus' && (!recipe.rating || recipe.rating < 4))
+            if (
+                ratingFilter === '4-plus' &&
+                (!recipe.rating || recipe.rating < 4)
+            )
                 return false;
             if (ratingFilter === '5-only' && recipe.rating !== 5) return false;
         }
@@ -90,7 +93,10 @@ export function filterRecipes<T extends RecipeBase>(
     });
 }
 
-export function sortRecipes<T extends RecipeBase>(recipes: T[], sortBy: SortBy): T[] {
+export function sortRecipes<T extends RecipeBase>(
+    recipes: T[],
+    sortBy: SortBy,
+): T[] {
     const sorted = [...recipes];
 
     switch (sortBy) {

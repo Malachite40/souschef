@@ -6,9 +6,7 @@ import type * as React from 'react';
 
 import { cn } from '@yeschefai/ui/lib/utils';
 
-function Sheet({
-    ...props
-}: React.ComponentProps<typeof Dialog.Root>) {
+function Sheet({ ...props }: React.ComponentProps<typeof Dialog.Root>) {
     return <Dialog.Root data-slot="sheet" {...props} />;
 }
 
@@ -18,9 +16,7 @@ function SheetTrigger({
     return <Dialog.Trigger data-slot="sheet-trigger" {...props} />;
 }
 
-function SheetClose({
-    ...props
-}: React.ComponentProps<typeof Dialog.Close>) {
+function SheetClose({ ...props }: React.ComponentProps<typeof Dialog.Close>) {
     return <Dialog.Close data-slot="sheet-close" {...props} />;
 }
 
@@ -63,10 +59,7 @@ function SheetContent({
     );
 }
 
-function SheetHeader({
-    className,
-    ...props
-}: React.ComponentProps<'div'>) {
+function SheetHeader({ className, ...props }: React.ComponentProps<'div'>) {
     return (
         <div
             data-slot="sheet-header"

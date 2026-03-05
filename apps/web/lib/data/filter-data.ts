@@ -22,22 +22,31 @@ export const AVAILABLE_FILTERS: ChatFilter[] = [
 
     // Difficulty
     { id: 'beginner', label: 'Beginner', group: 'difficulty', icon: '👶' },
-    { id: 'intermediate', label: 'Intermediate', group: 'difficulty', icon: '👨‍🍳' },
+    {
+        id: 'intermediate',
+        label: 'Intermediate',
+        group: 'difficulty',
+        icon: '👨‍🍳',
+    },
     { id: 'advanced', label: 'Advanced', group: 'difficulty', icon: '⭐' },
 ];
 
 export const FILTER_DESCRIPTIONS: Record<string, string> = {
-    'vegetarian': 'Vegetarian only — no meat or fish.',
-    'vegan': 'Vegan only — no animal products whatsoever (no meat, fish, dairy, eggs, honey).',
-    'gluten-free': 'Gluten-free — no wheat, barley, rye, or gluten-containing ingredients.',
-    'dairy-free': 'Dairy-free — no milk, cheese, butter, cream, or other dairy products.',
-    'keto': 'Keto-friendly — very low carb (under 20g net carbs), high fat.',
+    vegetarian: 'Vegetarian only — no meat or fish.',
+    vegan: 'Vegan only — no animal products whatsoever (no meat, fish, dairy, eggs, honey).',
+    'gluten-free':
+        'Gluten-free — no wheat, barley, rye, or gluten-containing ingredients.',
+    'dairy-free':
+        'Dairy-free — no milk, cheese, butter, cream, or other dairy products.',
+    keto: 'Keto-friendly — very low carb (under 20g net carbs), high fat.',
     'under-15': 'Total time (prep + cook) must be under 15 minutes.',
     'under-30': 'Total time (prep + cook) must be under 30 minutes.',
     'under-60': 'Total time (prep + cook) must be under 1 hour.',
-    'beginner': 'Beginner-friendly — simple techniques, common ingredients, minimal equipment.',
-    'intermediate': 'Intermediate difficulty — some cooking experience expected.',
-    'advanced': 'Advanced recipe — complex techniques or specialized equipment welcome.',
+    beginner:
+        'Beginner-friendly — simple techniques, common ingredients, minimal equipment.',
+    intermediate: 'Intermediate difficulty — some cooking experience expected.',
+    advanced:
+        'Advanced recipe — complex techniques or specialized equipment welcome.',
 };
 
 export const FILTER_GROUP_LABELS: Record<FilterGroup, string> = {

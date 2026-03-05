@@ -9,8 +9,8 @@ import {
     formatPrice,
 } from '@/lib/utils/cost-estimator';
 import { filterRecipes, sortRecipes } from '@/lib/utils/recipe-filters';
-import { api } from '@/trpc/react';
 import { useRecipesStore } from '@/stores/recipes-store';
+import { api } from '@/trpc/react';
 import { Badge } from '@yeschefai/ui/components/badge';
 import { Button } from '@yeschefai/ui/components/button';
 import {
@@ -172,7 +172,10 @@ export function SavedRecipesList() {
                             ingredients.length - MAX_VISIBLE_INGREDIENTS;
 
                         return (
-                            <Card key={recipe.id} className="group relative overflow-hidden">
+                            <Card
+                                key={recipe.id}
+                                className="group relative overflow-hidden"
+                            >
                                 <div className="absolute top-3 right-3 z-10 flex gap-1">
                                     <Button
                                         variant="ghost"
@@ -204,7 +207,10 @@ export function SavedRecipesList() {
                                 </div>
                                 <Link href={`/recipes/${recipe.id}`}>
                                     {recipe.imageUrl && (
-                                        <RecipeImage src={recipe.imageUrl} alt={recipe.title} />
+                                        <RecipeImage
+                                            src={recipe.imageUrl}
+                                            alt={recipe.title}
+                                        />
                                     )}
                                     <CardHeader className="pb-3">
                                         <CardTitle className="text-base pr-14">
@@ -265,7 +271,8 @@ export function SavedRecipesList() {
                                                     className="gap-1 text-xs bg-orange-500/10 text-orange-700 dark:text-orange-400"
                                                 >
                                                     <FlameIcon className="size-3" />
-                                                    {recipe.caloriesPerServing} cal
+                                                    {recipe.caloriesPerServing}{' '}
+                                                    cal
                                                 </Badge>
                                             )}
                                         </div>

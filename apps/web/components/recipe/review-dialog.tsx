@@ -12,7 +12,7 @@ import {
 } from '@yeschefai/ui/components/dialog';
 import { StarRating } from '@yeschefai/ui/components/star-rating';
 import { Textarea } from '@yeschefai/ui/components/textarea';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 interface ReviewDialogProps {
     open: boolean;
