@@ -1,4 +1,5 @@
 import { RecipeDetail } from '@/components/recipe/recipe-detail';
+import { SavePublicRecipeButton } from '@/components/recipe/save-public-recipe-button';
 import { api } from '@/trpc/server';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
@@ -102,6 +103,9 @@ export default async function PublicRecipePage({ params }: Props) {
                         publicRating: true,
                         publicComments: true,
                     }}
+                    actionButtons={
+                        <SavePublicRecipeButton recipe={recipe} />
+                    }
                     afterTitle={
                         recipe.description ? (
                             <p className="mb-4 text-muted-foreground">

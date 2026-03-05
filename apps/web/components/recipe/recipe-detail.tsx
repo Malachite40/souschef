@@ -78,6 +78,7 @@ interface InteractiveFeatures {
 interface RecipeDetailProps {
     recipe: RecipeData;
     interactive?: InteractiveFeatures;
+    actionButtons?: React.ReactNode;
     afterTitle?: React.ReactNode;
     afterBadges?: React.ReactNode;
     afterSources?: React.ReactNode;
@@ -103,6 +104,7 @@ function RecipeImage({ src, alt }: { src: string; alt: string }) {
 export function RecipeDetail({
     recipe,
     interactive = {},
+    actionButtons,
     afterTitle,
     afterBadges,
     afterSources,
@@ -138,23 +140,29 @@ export function RecipeDetail({
             {recipe.imageUrl ? (
                 <div className="relative">
                     <RecipeImage src={recipe.imageUrl} alt={recipe.title} />
-                    {recipe.slug && (
-                        <div className="absolute top-3 right-3">
-                            <ShareButton
-                                title={recipe.title}
-                                description={recipe.description ?? ''}
-                                slug={recipe.slug}
-                            />
+                    {(recipe.slug || actionButtons) && (
+                        <div className="absolute top-3 right-3 flex gap-2">
+                            {actionButtons}
+                            {recipe.slug && (
+                                <ShareButton
+                                    title={recipe.title}
+                                    description={recipe.description ?? ''}
+                                    slug={recipe.slug}
+                                />
+                            )}
                         </div>
                     )}
                 </div>
-            ) : recipe.slug ? (
-                <div className="mb-3 flex justify-end">
-                    <ShareButton
-                        title={recipe.title}
-                        description={recipe.description ?? ''}
-                        slug={recipe.slug}
-                    />
+            ) : (recipe.slug || actionButtons) ? (
+                <div className="mb-3 flex justify-end gap-2">
+                    {actionButtons}
+                    {recipe.slug && (
+                        <ShareButton
+                            title={recipe.title}
+                            description={recipe.description ?? ''}
+                            slug={recipe.slug}
+                        />
+                    )}
                 </div>
             ) : null}
 
