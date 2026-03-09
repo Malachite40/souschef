@@ -216,7 +216,7 @@ export function RecipeCard({ recipe, conversationId }: RecipeCardProps) {
                             {recipe.ingredients.map((ingredient, i) => (
                                 <li
                                     key={i}
-                                    className="flex items-center gap-2 text-sm"
+                                    className="flex items-center gap-2 text-sm rounded-md px-2 py-1 -mx-2 transition-colors hover:bg-muted/50"
                                 >
                                     <IngredientImage
                                         name={ingredient.item}

@@ -292,8 +292,8 @@ export function RecipeDetail({
                 key={i}
                 className={
                   interactive.ingredientImages
-                    ? "flex items-center gap-3 text-sm"
-                    : "text-sm"
+                    ? "flex items-center gap-3 text-sm rounded-md px-2 py-1 -mx-2 transition-colors hover:bg-muted/50"
+                    : "text-sm rounded-md px-2 py-1 -mx-2 transition-colors hover:bg-muted/50"
                 }
               >
                 {interactive.ingredientImages && (
