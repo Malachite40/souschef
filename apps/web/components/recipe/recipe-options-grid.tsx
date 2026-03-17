@@ -7,6 +7,7 @@ import { Skeleton } from '@yeschefai/ui/components/skeleton';
 import {
     ChefHatIcon,
     ClockIcon,
+    ExternalLinkIcon,
     FlameIcon,
     GaugeIcon,
     SearchIcon,
@@ -69,9 +70,22 @@ export function RecipeOptionsGrid({
                             />
                         )}
                         <CardHeader className="pb-2">
-                            <h3 className="text-sm font-semibold leading-tight">
-                                {option.title}
-                            </h3>
+                            <div className="flex items-start justify-between gap-1">
+                                <h3 className="text-sm font-semibold leading-tight">
+                                    {option.title}
+                                </h3>
+                                {option.sourceUrl && (
+                                    <a
+                                        href={option.sourceUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        onClick={(e) => e.stopPropagation()}
+                                        className="shrink-0 rounded-sm p-0.5 text-muted-foreground hover:text-foreground"
+                                    >
+                                        <ExternalLinkIcon className="size-3.5" />
+                                    </a>
+                                )}
+                            </div>
                             <p className="line-clamp-2 text-xs text-muted-foreground">
                                 {option.description}
                             </p>
