@@ -1,18 +1,28 @@
 import type { CapacitorConfig } from '@capacitor/cli';
+import dotenv from 'dotenv';
+
+const mode = process.env.CAPACITOR_MODE || 'development';
+dotenv.config({ path: `.env.cap.${mode}` });
+
+const serverUrl = process.env.CAPACITOR_SERVER_URL;
 
 const config: CapacitorConfig = {
     appId: 'com.yeschefai.app',
     appName: 'YesChef AI',
     webDir: '.next',
-    server: {
-        url: process.env.CAPACITOR_SERVER_URL || 'http://localhost:3020',
-        cleartext: true,
-        allowNavigation: [
-            'accounts.google.com',
-            '*.google.com',
-            '*.googleusercontent.com',
-        ],
-    },
+    ...(serverUrl
+        ? {
+              server: {
+                  url: serverUrl,
+                  cleartext: serverUrl.startsWith('http://'),
+                  allowNavigation: [
+                      'accounts.google.com',
+                      '*.google.com',
+                      '*.googleusercontent.com',
+                  ],
+              },
+          }
+        : {}),
     plugins: {
         SplashScreen: {
             launchAutoHide: false,

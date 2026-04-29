@@ -5,6 +5,8 @@ dist/
 .env
 .env.local
 .env.*.local
+.env.cap.development
+.env.cap.production
 .turbo/
 .DS_Store
 apps/web/ios/App/Pods/

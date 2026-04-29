@@ -1,54 +1,54 @@
 'use client';
 
+import { env } from '@/env';
 import { authClient } from '@/lib/auth-client';
-import { isNativeApp } from '@/lib/utils/platform';
+import { getPlatform, isNativeApp } from '@/lib/utils/platform';
 import { Button } from '@yeschefai/ui/components/button';
 import { ChefHatIcon } from 'lucide-react';
 
-async function handleNativeSignIn() {
-    const { Browser } = await import('@capacitor/browser');
-
-    const exchange = crypto.randomUUID();
-
-    const response = await authClient.signIn.social(
-        {
-            provider: 'google',
-            callbackURL: `/api/auth/native-callback?exchange=${exchange}`,
-            disableRedirect: true,
-        },
-        {
-            throw: true,
-        },
-    );
-
-    if (response.url) {
-        Browser.addListener('browserFinished', async () => {
-            const res = await fetch(
-                `/api/auth/claim-session?exchange=${exchange}`,
-            );
-            if (res.ok) {
-                const { token } = await res.json();
-                document.cookie = `better-auth.session_token=${token}; path=/; max-age=604800`;
-                window.location.href = '/';
-            }
+async function handleGoogleSignIn() {
+    if (isNativeApp() && getPlatform() === 'ios') {
+        const { GoogleSignIn } = await import(
+            '@capawesome/capacitor-google-sign-in'
+        );
+        await GoogleSignIn.initialize({
+            clientId: env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
         });
+        const result = await GoogleSignIn.signIn();
+        if (!result.idToken) {
+            alert('Google sign-in error: missing ID token');
+            return;
+        }
+        const res = await authClient.signIn.social({
+            provider: 'google',
+            idToken: {
+                token: result.idToken,
+                accessToken: result.accessToken ?? undefined,
+            },
+            callbackURL: '/',
+        });
+        if (res.error) {
+            alert(
+                `Google sign-in error: ${res.error.message ?? JSON.stringify(res.error)}`,
+            );
+            return;
+        }
+        window.location.href = '/';
+        return;
+    }
 
-        await Browser.open({ url: response.url });
+    const res = await authClient.signIn.social({
+        provider: 'google',
+        callbackURL: '/',
+    });
+    if (res.error) {
+        alert(
+            `Google sign-in error: ${res.error.message ?? JSON.stringify(res.error)}`,
+        );
     }
 }
 
 export default function LoginPage() {
-    const handleSignIn = () => {
-        if (isNativeApp()) {
-            handleNativeSignIn();
-        } else {
-            authClient.signIn.social({
-                provider: 'google',
-                callbackURL: '/',
-            });
-        }
-    };
-
     return (
         <div className="flex h-dvh items-center justify-center px-4 pt-[var(--safe-area-inset-top)] pb-[var(--safe-area-inset-bottom)]">
             <div className="w-full max-w-sm space-y-6 rounded-lg border bg-card p-8">
@@ -61,7 +61,7 @@ export default function LoginPage() {
                         AI-powered recipe assistant
                     </p>
                 </div>
-                <Button className="w-full" onClick={handleSignIn}>
+                <Button className="w-full" onClick={handleGoogleSignIn}>
                     Sign in with Google
                 </Button>
             </div>
