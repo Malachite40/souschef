@@ -107,7 +107,7 @@ export function SavedRecipesList() {
                                 <Skeleton className="h-5 w-16" />
                             </div>
                         </CardHeader>
-                        <CardContent>
+                        <CardContent className="hidden sm:block">
                             <div className="space-y-2">
                                 {Array.from({ length: 4 }).map((_, j) => (
                                     <div
@@ -171,6 +171,61 @@ export function SavedRecipesList() {
                         const hiddenCount =
                             ingredients.length - MAX_VISIBLE_INGREDIENTS;
 
+                        const badges = (
+                            <div className="flex flex-wrap-reverse gap-1.5">
+                                {recipe.rating && (
+                                    <Badge
+                                        variant="secondary"
+                                        className="gap-1 text-xs bg-amber-500/10 text-amber-700 dark:text-amber-400"
+                                    >
+                                        <StarRating
+                                            value={recipe.rating}
+                                            size="sm"
+                                        />
+                                    </Badge>
+                                )}
+                                {recipe.servings && (
+                                    <Badge
+                                        variant="secondary"
+                                        className="gap-1 text-xs"
+                                    >
+                                        <UsersIcon className="size-3" />
+                                        {recipe.servings}
+                                    </Badge>
+                                )}
+                                {recipe.prepTime && (
+                                    <Badge
+                                        variant="secondary"
+                                        className="gap-1 text-xs"
+                                    >
+                                        <ClockIcon className="size-3" />
+                                        {recipe.prepTime}
+                                    </Badge>
+                                )}
+                                {recipe.cookTime && (
+                                    <Badge
+                                        variant="secondary"
+                                        className="gap-1 text-xs"
+                                    >
+                                        <ClockIcon className="size-3" />
+                                        {recipe.cookTime}
+                                    </Badge>
+                                )}
+                                {totalCost > 0 && (
+                                    <Badge className="gap-1 text-xs bg-green-600 text-white">
+                                        <DollarSignIcon className="size-3" />
+                                        {formatPrice(totalCost)}
+                                    </Badge>
+                                )}
+                                {recipe.caloriesPerServing && (
+                                    <Badge className="gap-1 text-xs bg-orange-500 text-white">
+                                        <FlameIcon className="size-3" />
+                                        {recipe.caloriesPerServing} cal
+                                    </Badge>
+                                )}
+                            </div>
+                        );
+
                         return (
                             <Card
                                 key={recipe.id}
@@ -207,77 +262,31 @@ export function SavedRecipesList() {
                                 </div>
                                 <Link href={`/recipes/${recipe.id}`}>
                                     {recipe.imageUrl && (
-                                        <RecipeImage
-                                            src={recipe.imageUrl}
-                                            alt={recipe.title}
-                                        />
+                                        <div className="relative">
+                                            <RecipeImage
+                                                src={recipe.imageUrl}
+                                                alt={recipe.title}
+                                            />
+                                            <div className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-black/60 to-transparent sm:hidden" />
+                                            <div className="absolute top-3 left-3 z-10 max-w-[calc(100%-5rem)] sm:hidden">
+                                                <h3 className="line-clamp-2 rounded-md bg-black/40 p-1.5 text-sm font-semibold leading-tight text-white backdrop-blur-sm">
+                                                    {recipe.title}
+                                                </h3>
+                                            </div>
+                                            <div className="absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-black/70 via-black/40 to-transparent p-3 sm:hidden">
+                                                {badges}
+                                            </div>
+                                        </div>
                                     )}
-                                    <CardHeader className="pb-3">
+                                    <CardHeader
+                                        className={`p-3 ${recipe.imageUrl ? 'hidden sm:flex' : ''}`}
+                                    >
                                         <CardTitle className="text-base pr-14">
                                             {recipe.title}
                                         </CardTitle>
-                                        <div className="flex flex-wrap gap-1.5">
-                                            {recipe.rating && (
-                                                <Badge
-                                                    variant="secondary"
-                                                    className="gap-1 text-xs bg-amber-500/10 text-amber-700 dark:text-amber-400"
-                                                >
-                                                    <StarRating
-                                                        value={recipe.rating}
-                                                        size="sm"
-                                                    />
-                                                </Badge>
-                                            )}
-                                            {recipe.servings && (
-                                                <Badge
-                                                    variant="secondary"
-                                                    className="gap-1 text-xs"
-                                                >
-                                                    <UsersIcon className="size-3" />
-                                                    {recipe.servings}
-                                                </Badge>
-                                            )}
-                                            {recipe.prepTime && (
-                                                <Badge
-                                                    variant="secondary"
-                                                    className="gap-1 text-xs"
-                                                >
-                                                    <ClockIcon className="size-3" />
-                                                    {recipe.prepTime}
-                                                </Badge>
-                                            )}
-                                            {recipe.cookTime && (
-                                                <Badge
-                                                    variant="secondary"
-                                                    className="gap-1 text-xs"
-                                                >
-                                                    <ClockIcon className="size-3" />
-                                                    {recipe.cookTime}
-                                                </Badge>
-                                            )}
-                                            {totalCost > 0 && (
-                                                <Badge
-                                                    variant="secondary"
-                                                    className="gap-1 text-xs bg-green-500/10 text-green-700 dark:text-green-400"
-                                                >
-                                                    <DollarSignIcon className="size-3" />
-                                                    Est.{' '}
-                                                    {formatPrice(totalCost)}
-                                                </Badge>
-                                            )}
-                                            {recipe.caloriesPerServing && (
-                                                <Badge
-                                                    variant="secondary"
-                                                    className="gap-1 text-xs bg-orange-500/10 text-orange-700 dark:text-orange-400"
-                                                >
-                                                    <FlameIcon className="size-3" />
-                                                    {recipe.caloriesPerServing}{' '}
-                                                    cal
-                                                </Badge>
-                                            )}
-                                        </div>
+                                        {badges}
                                     </CardHeader>
-                                    <CardContent className="pt-0">
+                                    <CardContent className="hidden pt-0 sm:block">
                                         <ul className="space-y-1.5">
                                             {visibleIngredients.map(
                                                 (ingredient, i) => {

@@ -10,7 +10,13 @@
 :root {
     --safe-area-inset-top: env(safe-area-inset-top, 0px);
     --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-area-override: env(safe-area-inset-bottom, 0px);
     --keyboard-height: 0px;
+}
+
+html.capacitor-native [data-slot="drawer-content"] {
+    padding-bottom: calc(var(--safe-area-override) + var(--keyboard-height));
+    transition: padding-bottom 300ms ease-out;
 }
 
 @theme inline {

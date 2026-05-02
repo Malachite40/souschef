@@ -359,26 +359,19 @@ export function InstructionSteps({
 }
 
 function StepCard({ step }: { step: InstructionStep }) {
+    const hasIngredients = !!step.ingredients && step.ingredients.length > 0;
     return (
-        <div className="rounded-lg border bg-muted/30 p-3">
-            <div className="mb-2 flex items-center justify-between gap-2">
-                <Badge variant="secondary" className="font-semibold text-xs">
-                    Step {step.step}
-                </Badge>
-                {step.time && (
-                    <Badge
-                        variant="outline"
-                        className="gap-1 text-xs text-muted-foreground"
-                    >
-                        <ClockIcon className="size-3" />
-                        {step.time}
-                    </Badge>
-                )}
-            </div>
+        <div className="relative rounded-lg border bg-muted/30 p-3">
+            <Badge
+                variant="secondary"
+                className="-top-2 -left-2 absolute border-border bg-background font-semibold text-xs"
+            >
+                Step {step.step}
+            </Badge>
             <p className="text-sm leading-relaxed">{step.text}</p>
-            {step.ingredients && step.ingredients.length > 0 && (
-                <div className="mt-2 flex flex-wrap gap-1.5">
-                    {step.ingredients.map((name) => (
+            {(step.time || hasIngredients) && (
+                <div className="mt-2 flex flex-wrap items-center gap-1.5">
+                    {step.ingredients?.map((name) => (
                         <Badge
                             key={name}
                             variant="secondary"
@@ -388,6 +381,15 @@ function StepCard({ step }: { step: InstructionStep }) {
                             {name}
                         </Badge>
                     ))}
+                    {step.time && (
+                        <Badge
+                            variant="outline"
+                            className="ml-auto gap-1 text-xs text-muted-foreground"
+                        >
+                            <ClockIcon className="size-3" />
+                            {step.time}
+                        </Badge>
+                    )}
                 </div>
             )}
         </div>

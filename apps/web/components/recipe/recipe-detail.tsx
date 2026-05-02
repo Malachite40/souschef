@@ -165,7 +165,7 @@ export function RecipeDetail({
       ) : null}
 
       <div className="mb-3">
-        <h1 className="text-2xl font-bold">{recipe.title}</h1>
+        <h1 className="text-4xl font-bold md:text-5xl">{recipe.title}</h1>
       </div>
 
       {afterTitle}

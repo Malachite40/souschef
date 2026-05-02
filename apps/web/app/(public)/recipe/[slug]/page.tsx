@@ -1,3 +1,4 @@
+import { OpenInAppButton } from '@/components/recipe/open-in-app-button';
 import { RecipeDetail } from '@/components/recipe/recipe-detail';
 import { SavePublicRecipeButton } from '@/components/recipe/save-public-recipe-button';
 import { api } from '@/trpc/server';
@@ -92,6 +93,7 @@ export default async function PublicRecipePage({ params }: Props) {
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
             <article className="mx-auto max-w-3xl px-4 py-8 pb-[calc(2rem+var(--safe-area-inset-bottom))] md:px-6">
+                <OpenInAppButton slug={slug} />
                 <RecipeDetail
                     recipe={recipe}
                     interactive={{
