@@ -166,6 +166,12 @@ export function RecipeDetail({
 
       <div className="mb-3">
         <h1 className="text-4xl font-bold md:text-5xl">{recipe.title}</h1>
+        {interactive.reviewDialog && recipe.rating && (
+          <div className="flex items-center gap-2 pt-2">
+            <StarRating value={recipe.rating} size="md" />
+            <span className="text-sm font-medium">{recipe.rating}/5</span>
+          </div>
+        )}
       </div>
 
       {afterTitle}
@@ -219,11 +225,7 @@ export function RecipeDetail({
       {interactive.reviewDialog &&
         (recipe.rating ? (
           <div className="mb-6 rounded-lg border bg-amber-500/5 border-amber-500/20 p-3">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <StarRating value={recipe.rating} size="md" />
-                <span className="text-sm font-medium">{recipe.rating}/5</span>
-              </div>
+            <div className="flex items-center justify-end">
               <Button
                 variant="ghost"
                 size="sm"
