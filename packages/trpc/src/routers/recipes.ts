@@ -3,6 +3,7 @@ import type { db as dbClient } from '@yeschefai/db';
 import {
     chatConversations,
     recipeComments,
+    recipeFolders,
     recipeRatings,
     savedRecipes,
     user,
@@ -246,6 +247,46 @@ export const recipesRouter = createTRPCRouter({
                     ),
                 );
             return { success: true };
+        }),
+
+    move: authenticatedProcedure
+        .input(
+            z.object({
+                id: z.string().uuid(),
+                folderId: z.string().uuid().nullable(),
+            }),
+        )
+        .mutation(async ({ ctx, input }) => {
+            if (input.folderId) {
+                const [folder] = await ctx.db
+                    .select({ id: recipeFolders.id })
+                    .from(recipeFolders)
+                    .where(
+                        and(
+                            eq(recipeFolders.id, input.folderId),
+                            eq(recipeFolders.userId, ctx.userId),
+                        ),
+                    )
+                    .limit(1);
+                if (!folder) {
+                    throw new TRPCError({
+                        code: 'NOT_FOUND',
+                        message: 'Folder not found',
+                    });
+                }
+            }
+
+            const [updated] = await ctx.db
+                .update(savedRecipes)
+                .set({ folderId: input.folderId })
+                .where(
+                    and(
+                        eq(savedRecipes.id, input.id),
+                        eq(savedRecipes.userId, ctx.userId),
+                    ),
+                )
+                .returning();
+            return updated ?? null;
         }),
 
     // ── Public Comments ─────────────────────────────

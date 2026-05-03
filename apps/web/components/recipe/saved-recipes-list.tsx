@@ -1,6 +1,8 @@
 "use client";
 
+import { FolderPills } from "@/components/recipe/folder-pills";
 import { IngredientImage } from "@/components/recipe/ingredient-image";
+import { MoveToFolderMenu } from "@/components/recipe/move-to-folder-menu";
 import { RecipeToolbar } from "@/components/recipe/recipe-toolbar";
 import { ReviewDialog } from "@/components/recipe/review-dialog";
 import {
@@ -35,7 +37,6 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import { div } from "three/src/nodes/math/OperatorNode.js";
 
 function RecipeImage({ src, alt }: { src: string; alt: string }) {
   const [hidden, setHidden] = useState(false);
@@ -66,6 +67,7 @@ interface Ingredient {
 
 export function SavedRecipesList() {
   const { data: recipes, isLoading } = api.recipes.list.useQuery();
+  const { data: folders = [] } = api.folders.list.useQuery();
   const utils = api.useUtils();
 
   const deleteRecipe = api.recipes.delete.useMutation({
@@ -74,8 +76,38 @@ export function SavedRecipesList() {
     },
   });
 
-  const { sortBy, timeFilter, costFilter, ratingFilter, searchQuery } =
-    useRecipesStore();
+  const moveRecipe = api.recipes.move.useMutation({
+    onSuccess: () => {
+      utils.recipes.list.invalidate();
+      utils.folders.list.invalidate();
+    },
+  });
+
+  const createFolder = api.folders.create.useMutation();
+
+  const handleNewFolderForRecipe = async (recipeId: string) => {
+    const name = window.prompt("New folder name");
+    const trimmed = name?.trim();
+    if (!trimmed) return;
+    try {
+      const folder = await createFolder.mutateAsync({ name: trimmed });
+      utils.folders.list.invalidate();
+      if (folder) {
+        await moveRecipe.mutateAsync({ id: recipeId, folderId: folder.id });
+      }
+    } catch (err) {
+      window.alert(err instanceof Error ? err.message : "Could not create folder");
+    }
+  };
+
+  const {
+    sortBy,
+    timeFilter,
+    costFilter,
+    ratingFilter,
+    searchQuery,
+    selectedFolderId,
+  } = useRecipesStore();
 
   const [reviewRecipe, setReviewRecipe] = useState<{
     id: string;
@@ -86,14 +118,27 @@ export function SavedRecipesList() {
 
   const filteredAndSorted = useMemo(() => {
     if (!recipes) return [];
-    const filtered = filterRecipes(recipes, {
+    const folderFiltered = recipes.filter((r) => {
+      if (selectedFolderId === "all") return true;
+      if (selectedFolderId === "uncategorized") return r.folderId == null;
+      return r.folderId === selectedFolderId;
+    });
+    const filtered = filterRecipes(folderFiltered, {
       searchQuery,
       timeFilter,
       costFilter,
       ratingFilter,
     });
     return sortRecipes(filtered, sortBy);
-  }, [recipes, searchQuery, timeFilter, costFilter, ratingFilter, sortBy]);
+  }, [
+    recipes,
+    selectedFolderId,
+    searchQuery,
+    timeFilter,
+    costFilter,
+    ratingFilter,
+    sortBy,
+  ]);
 
   if (isLoading) {
     return (
@@ -146,6 +191,7 @@ export function SavedRecipesList() {
 
   return (
     <>
+      <FolderPills />
       <RecipeToolbar />
 
       {filteredAndSorted.length === 0 ? (
@@ -217,7 +263,7 @@ export function SavedRecipesList() {
                     <Button
                       variant="ghost"
                       size="icon-xs"
-                      className="text-muted-foreground hover:text-destructive opacity-0 sm:group-hover:opacity-100 transition-opacity"
+                      className="bg-background/80 backdrop-blur-sm shadow-sm hover:bg-background text-muted-foreground hover:text-destructive opacity-0 sm:group-hover:opacity-100 transition-opacity"
                       onClick={() =>
                         deleteRecipe.mutate({
                           id: recipe.id,
@@ -226,10 +272,18 @@ export function SavedRecipesList() {
                     >
                       <Trash2Icon className="size-4" />
                     </Button>
+                    <MoveToFolderMenu
+                      currentFolderId={recipe.folderId}
+                      folders={folders}
+                      onSelect={(folderId) =>
+                        moveRecipe.mutate({ id: recipe.id, folderId })
+                      }
+                      onCreateNew={() => handleNewFolderForRecipe(recipe.id)}
+                    />
                     <Button
                       variant="ghost"
                       size="icon-xs"
-                      className="text-muted-foreground hover:text-amber-500"
+                      className="bg-background/80 backdrop-blur-sm shadow-sm hover:bg-background text-muted-foreground hover:text-amber-500"
                       onClick={() =>
                         setReviewRecipe({
                           id: recipe.id,

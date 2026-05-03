@@ -128,6 +128,9 @@ export const savedRecipes = pgTable('saved_recipes', {
         () => chatConversations.id,
         { onDelete: 'set null' },
     ),
+    folderId: uuid('folder_id').references(() => recipeFolders.id, {
+        onDelete: 'set null',
+    }),
     title: text('title').notNull(),
     slug: text('slug').unique(),
     description: text('description'),
@@ -166,6 +169,32 @@ export const savedRecipes = pgTable('saved_recipes', {
     notes: text('notes'),
     createdAt: timestamp('created_at', { mode: 'date' }).notNull().defaultNow(),
 });
+
+// ──────────────────────────────────────────────
+// Recipe Folders
+// ──────────────────────────────────────────────
+
+export const recipeFolders = pgTable(
+    'recipe_folders',
+    {
+        id: uuid('id')
+            .primaryKey()
+            .$defaultFn(() => crypto.randomUUID()),
+        userId: text('user_id')
+            .notNull()
+            .references(() => user.id, { onDelete: 'cascade' }),
+        name: text('name').notNull(),
+        createdAt: timestamp('created_at', { mode: 'date' })
+            .notNull()
+            .defaultNow(),
+    },
+    (t) => ({
+        userNameUnique: unique('recipe_folders_user_id_name_unique').on(
+            t.userId,
+            t.name,
+        ),
+    }),
+);
 
 // ──────────────────────────────────────────────
 // Recipe Comments

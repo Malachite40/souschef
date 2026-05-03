@@ -43,6 +43,13 @@
       "when": 1772693085000,
       "tag": "0005_marvelous_shape",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1777826794375,
+      "tag": "0006_shocking_annihilus",
+      "breakpoints": true
     }
   ]
 }
